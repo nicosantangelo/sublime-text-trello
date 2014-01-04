@@ -1,0 +1,8 @@
+data/setup.py.i
+data/MANIFEST.in.i
+data/.hgtags.i
+data/.hgignore.i
+data/trollop/tests.py.i
+data/README.rst.i
+data/trollop/lib.py.i
+data/trollop/__init__.py.i
