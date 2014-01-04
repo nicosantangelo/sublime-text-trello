@@ -142,8 +142,6 @@ class Field(object):
     """
 
     def __init__(self, key=None):
-        print("HERE")
-        print(key)
         self.key = key
 
     def __get__(self, instance, owner):
