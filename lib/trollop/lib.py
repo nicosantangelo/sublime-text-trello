@@ -294,7 +294,7 @@ class Board(LazyTrello, Closable):
     _prefix = '/boards/'
 
     url = Field()
-    name = Field()
+    name = Field('name')
     pinned = Field()
     prefs = Field()
     desc = Field()

@@ -1,5 +1,5 @@
 [{
-  "id": "trello",
-  "caption": "Trello: Do something",
-  "command": "trello"
+  "id": "trelloboardnames",
+  "caption": "Trello: Show board names",
+  "command": "trello_board_names"
 }]
