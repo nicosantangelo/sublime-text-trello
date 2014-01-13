@@ -10,13 +10,29 @@ from trollop import TrelloConnection
 # A base for each command
 class TrelloCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        self.settings = sublime.load_settings("Trello.sublime-settings")
-        self.conn = TrelloConnection(self.settings.get("key"), self.settings.get("token"))
+        self.setup_data_from_settings()
+        
+        if not self.token:
+            print("Please go to %s and paste the token in the settings" % self.token_url())
+            return
+
+        self.conn = TrelloConnection(self.key, self.token)
         self.work(edit)
 
     # Main method, override
     def work(self, edit):
         pass
+
+    def token_url(self):
+        return "https://trello.com/1/connect?key=%s&name=sublime_app&response_type=token&scope=read,write" % self.settings.get("key")
+
+    def setup_data_from_settings(self):
+        default_settings = sublime.load_settings("Default_app.sublime-settings")
+        user_settings    = sublime.load_settings("Trello.sublime-settings")
+
+        self.key    = default_settings.get("key")    or user_settings.get("key")
+        self.secret = default_settings.get("secret") or user_settings.get("secret")
+        self.token  = user_settings.get("token")
 
     # Panels and message
     def display_message(self, text):
