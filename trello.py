@@ -13,18 +13,11 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.setup_data_from_settings()
         
         if not self.token:
-            print("Please go to %s and paste the token in the settings" % self.token_url())
+            self.show_output_panel()
             return
 
         self.conn = TrelloConnection(self.key, self.token)
         self.work(edit)
-
-    # Main method, override
-    def work(self, edit):
-        pass
-
-    def token_url(self):
-        return "https://trello.com/1/connect?key=%s&name=sublime_app&response_type=token&scope=read,write" % self.settings.get("key")
 
     def setup_data_from_settings(self):
         default_settings = sublime.load_settings("Default_app.sublime-settings")
@@ -33,6 +26,21 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.key    = default_settings.get("key")    or user_settings.get("key")
         self.secret = default_settings.get("secret") or user_settings.get("secret")
         self.token  = user_settings.get("token")
+
+    def help_text(self):
+        first_half  = "Please go to:\n%s\nand paste the token in the settings." % self.token_url()
+        second_half = "If you don't want to use the default app, you can change the key and the secret too, just go to:\n%s\nand copy paste to your hearts content :)" % self.key_secret_generator_url()
+        return "%s\n%s" % (first_half, second_half)
+
+    def token_url(self):
+        return "https://trello.com/1/connect?key=%s&name=sublime_app&response_type=token&scope=read,write" % self.key
+
+    def key_secret_generator_url(self):
+        return "https://trello.com/1/appKey/generate"
+
+    # Main method, override
+    def work(self, edit):
+        pass
 
     # Panels and message
     def display_message(self, text):
@@ -43,3 +51,14 @@ class TrelloCommand(sublime_plugin.TextCommand):
 
     def show_input_panel(self, caption, initial_text = "", on_done = None, on_change = None, on_cancel = None):
         self.view.window().show_input_panel(caption, initial_text, on_done, on_change, on_cancel)
+
+    # Output view
+    def show_output_panel(self):
+        self.output_view = self.view.window().get_output_panel("textarea")
+        self.append_to_output_view(self.help_text())
+        self.view.window().run_command("show_panel", {"panel": "output.textarea"})
+
+    def append_to_output_view(self, text):
+        self.output_view.set_read_only(False)
+        self.output_view.run_command("append", { "characters": text })
+        self.output_view.set_read_only(True)
