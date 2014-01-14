@@ -22,7 +22,6 @@ class TrelloConnection(object):
         self.token = oauth_token
 
     def request(self, method, path, params=None, body=None):
-
         if not path.startswith('/'):
             path = '/' + path
         url = 'https://api.trello.com/1' + path
@@ -315,7 +314,7 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
 
     url = Field()
     closed = Field()
-    name = Field()
+    name = Field('name')
     badges = Field()
     checkItemStates = Field()
     desc = Field()

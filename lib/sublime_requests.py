@@ -94,7 +94,7 @@ class CurlSession(object):
             sublime.error_message("I couldn't find \"curl\" on your system. Curl is required on Linux. Please install it and try again.")
             return
 
-        curl_options = ['-i', '-L', '--user-agent', 'Sublime Github', '-s']
+        curl_options = ['-i', '-L', '--user-agent', 'Sublime Trello', '-s']
         if auth:
             curl_options.extend(['--user', "%s:%s" % auth])
         if self.verify:
@@ -102,10 +102,12 @@ class CurlSession(object):
         if headers:
             for k, v in headers.items():
                 curl_options.extend(['-H', "%s: %s" % (k, v)])
+
         if method in ('post', 'patch'):
             curl_options.extend(['-d', data])
-        if method == 'patch':
-            curl_options.extend(['-X', 'PATCH'])
+            
+        curl_options.extend(['-X', method.upper()])
+
         if params:
             url += '?' + '&'.join(['='.join([k, str(v)]) for k, v in params.items()])
         if proxies and proxies.get('https', None):
