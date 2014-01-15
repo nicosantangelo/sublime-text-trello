@@ -11,6 +11,7 @@ class TrelloNavigateCommand(TrelloCommand):
 
     def card_options(self, index):
         # self.cards[index].close()
+        pass
 
     def names_from(self, collection):
         return [element.name for element in collection]
