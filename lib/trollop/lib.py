@@ -354,7 +354,7 @@ class List(LazyTrello, Closable):
     _prefix = '/lists/'
 
     closed = Field()
-    name = Field()
+    name = Field('name')
     url = Field()
     board = ObjectField('idBoard', 'Board')
     cards = SubList('Card')
