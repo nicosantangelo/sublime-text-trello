@@ -2,8 +2,6 @@
 
 This is a package for [Sublime Text 3](http://www.sublimetext.com/3) that provides a number of useful commands for interacting with Trello (using the [Trello API](https://trello.com/docs/index.html)).
 
-*Development delayed due to vacation* 
-
 ## Usage
 
 Because it's still early in development, the interaction is kind of rough right now, but the idea it's to navigate across your Trello data like [this package](https://github.com/Chris---/SublimeText-File-Navigator).
