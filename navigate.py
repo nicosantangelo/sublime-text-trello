@@ -1,23 +1,21 @@
 from .trello import TrelloCommand
-import operations
-import card_options
+from .operations import *
+from .card_options import CardOptions
 
 class TrelloNavigateCommand(TrelloCommand):
     def work(self, edit):
-        self.show(BoardOperation, self.conn.me, self.show_lists)
+        self.show(BoardOperation(self.conn.me), self.show_lists)
 
     def show_lists(self, index):
-        self.show(ListOperation, index, self.show_cards)
+        self.show(ListOperation(self.last_trello_element(index)), self.show_cards)
 
     def show_cards(self, index):
-        self.show(CardOperation, index, self.show_card_options)
+        self.show(CardOperation(self.last_trello_element(index)), self.show_card_options)
 
-    def show(self, Operation, indexOrObject, callback):
-        try:
-            operation = Operation(self.last_operation.find(indexOrObject))
-        except (AttributeError, TypeError):
-            operation = Operation(indexOrObject)
+    def last_trello_element(self, index):
+        return self.last_operation.find(index)
 
+    def show(self, operation, callback):
         self.last_operation = operation
         self.show_quick_panel(operation.element_names(), callback)
 
