@@ -1,5 +1,6 @@
 from .trello import TrelloCommand
 import operations
+import card_options
 
 class TrelloNavigateCommand(TrelloCommand):
     def work(self, edit):
@@ -14,18 +15,14 @@ class TrelloNavigateCommand(TrelloCommand):
     def show(self, Operation, indexOrObject, callback):
         try:
             operation = Operation(self.last_operation.find(indexOrObject))
-        except AttributeError:
+        except (AttributeError, TypeError):
             operation = Operation(indexOrObject)
 
         self.last_operation = operation
         self.show_quick_panel(operation.element_names(), callback)
 
     def show_card_options(self, index):
-        self.card_options = ["Archive", "Another option...", "Exit"]
         card = self.last_operation.find(index)
+        card_options = CardOptions(card)
 
-        def do_card_option(index):
-            if index == 0:
-                card.close()
-
-        self.show_quick_panel(self.card_options, do_card_option)
+        self.show_quick_panel(card_options.names(), card_options.execute)
