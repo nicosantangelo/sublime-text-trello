@@ -326,6 +326,10 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
     checklists = ListField('idChecklists','Checklist')
     members = ListField('idMembers', 'Member')
 
+    def add_comment(self, text):
+        path = self._path + '/actions/comments'
+        return self._conn.post(path, dict(text=text))
+
 class Checklist(LazyTrello):
 
     _prefix = '/checklists/'

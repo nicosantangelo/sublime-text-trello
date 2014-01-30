@@ -21,6 +21,6 @@ class TrelloNavigateCommand(TrelloCommand):
 
     def show_card_options(self, index):
         card = self.last_operation.find(index)
-        card_options = CardOptions(card)
+        card_options = CardOptions(card, self)
 
         self.show_quick_panel(card_options.names(), card_options.execute)
