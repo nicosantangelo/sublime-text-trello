@@ -12,11 +12,11 @@ class CardOptionsTests(unittest.TestCase):
     def test_names_returns_the_card_operations(self):
         self.assertEqual(["Comment", "Archive", "Exit"], self.card_options.names())
 
-    def test_execute_calls_the_method_at_the_given_index(self):
+    def test_call_action_calls_the_method_at_the_given_index(self):
         first_option = self.card_options.options[1]
         first_option["action"] = MagicMock()
 
-        self.card_options.execute(1)
+        self.card_options.call_action(1)
         first_option["action"].assert_called()
 
 

@@ -16,7 +16,7 @@ class CardOptions():
     def names(self):
         return [option['name'] for option in self.options]
 
-    def execute(self, index):
+    def call_action(self, index):
         option = self.options[index]
         if not option is None:
             option['action']()
