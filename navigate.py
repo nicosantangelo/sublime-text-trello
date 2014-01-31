@@ -1,6 +1,6 @@
-from .trello import TrelloCommand
-from .operations import *
-from .card_options import CardOptions
+from Trello.trello import TrelloCommand
+from Trello.operations import *
+from Trello.card_options import CardOptions
 
 class TrelloNavigateCommand(TrelloCommand):
     def work(self, edit):
