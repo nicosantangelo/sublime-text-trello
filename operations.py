@@ -1,4 +1,10 @@
 class BaseOperation():
+    def __init__(self, trello_element = None):
+        self.trello_element = trello_element
+
+    def set_collection(self):
+        self.collection = getattr(self.trello_element, self.collection_name)
+
     def find(self, index):
         return self.collection[index]
 
@@ -10,22 +16,16 @@ class BaseOperation():
         return [element.name for element in self.collection]
 
 class BoardOperation(BaseOperation):
-    def __init__(self, user):
-        self.user = user
-
-    def set_collection(self):
-        self.collection = self.user.boards
+    @property
+    def collection_name(self):
+        return "boards"
 
 class ListOperation(BaseOperation):
-    def __init__(self, board):
-        self.board = board
-
-    def set_collection(self):
-        self.collection = self.board.lists
+    @property
+    def collection_name(self):
+        return "lists"
 
 class CardOperation(BaseOperation):
-    def __init__(self, lst):
-        self.list = lst
-
-    def set_collection(self):
-        self.collection = self.list.cards
+    @property
+    def collection_name(self):
+        return "cards"
