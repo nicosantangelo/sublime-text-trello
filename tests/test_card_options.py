@@ -17,7 +17,7 @@ class CardOptionsTests(unittest.TestCase):
         first_option["action"] = MagicMock()
 
         self.card_options.call_action(1)
-        first_option["action"].assert_called()
+        first_option["action"].assert_called_with()
 
 
 if __name__ == '__main__':

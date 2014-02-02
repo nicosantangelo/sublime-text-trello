@@ -4,10 +4,10 @@ class BaseOperation():
 
     def element_names(self):
         self.set_collection()
-        return self.names_from(self.collection)
+        return self.names()
 
-    def names_from(self, collection):
-        return [element.name for element in collection]
+    def names(self):
+        return [element.name for element in self.collection]
 
 class BoardOperation(BaseOperation):
     def __init__(self, user):

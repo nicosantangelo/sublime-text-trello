@@ -18,7 +18,7 @@ class Navigator():
         self.show(CardOperation(self.last_trello_element(index)), self.show_card_options)
 
     def show_card_options(self, index):
-        card = self.last_operation.find(index)
+        card = self.last_trello_element(index)
         card_options = CardOptions(card, self.receiver)
 
         self.receiver.execute(card_options.names(), card_options.call_action)
