@@ -1,6 +1,9 @@
 class CardOptions():
     def __init__(self, card, command):
         self.options = [{
+            'name': "Comments",
+            'action': self.comments
+        }, {
             'name': "Comment",
             'action': self.comment
         }, {
@@ -22,6 +25,9 @@ class CardOptions():
             option['action']()
 
     # Actions
+    def comments(self):
+        self.command.show_quick_panel(self.card.comments())
+
     def comment(self, text = ""):
         if text:
             self.card.add_comment(text)

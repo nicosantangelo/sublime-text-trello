@@ -10,7 +10,7 @@ class CardOptionsTests(unittest.TestCase):
         self.card_options = CardOptions(fake_card, fake_command)
 
     def test_names_returns_the_card_operations(self):
-        self.assertEqual(["Comment", "Archive", "Exit"], self.card_options.names())
+        self.assertEqual(["Comments", "Comment", "Archive", "Exit"], self.card_options.names())
 
     def test_call_action_calls_the_method_at_the_given_index(self):
         first_option = self.card_options.options[1]

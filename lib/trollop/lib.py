@@ -330,6 +330,13 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
         path = self._path + '/actions/comments'
         return self._conn.post(path, dict(text=text))
 
+    def comments(self):
+        path = self._path + '/actions'
+        response = self._conn.get(path, dict(filter="commentCard"))
+        comments_json = json.loads(response)
+        print(response)
+        return [comment_json["data"]["text"] for comment_json in comments_json]
+
 class Checklist(LazyTrello):
 
     _prefix = '/checklists/'
