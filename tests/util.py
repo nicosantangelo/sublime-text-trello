@@ -16,7 +16,10 @@ class TrelloElementMock():
         return (element, property_mock)
 
 class CommandMock(object):
-    def execute():
+    def display():
+        pass
+
+    def input():
         pass
 
     @classmethod

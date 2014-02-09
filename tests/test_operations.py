@@ -6,34 +6,53 @@ from operations import *
 
 class BaseOperationTests(unittest.TestCase):
     def setUp(self):
-        self.base_operation = BaseOperation()
-        self.base_operation.set_collection = MagicMock()
-        self.base_operation.collection = TrelloElementMock.collection()
+        self.base_operation, self.trello_element = create_operation(BaseOperation)
 
-    def test_element_names_sets_the_collection(self):
-        self.base_operation.element_names()
+    def test_names_sets_the_collection(self):
+        self.base_operation.set_collection = MagicMock()
+        self.base_operation.names()
         self.base_operation.set_collection.assert_called_with()
 
-    def test_element_names_returns_every_name_from_the_collection(self):
-        self.assertEqual(self.base_operation.element_names(), ["first", "second"])
+    def test_names_returns_every_name_from_the_collection(self):
+        self.assertEqual(self.base_operation.names(), ["first", "second"])
 
     def test_find_gets_an_element_from_the_collection_by_index(self):
         self.assertEqual(self.base_operation.find(1), self.base_operation.collection[1])
 
-class SpecificOperationTests(unittest.TestCase):
-    def test_set_collection_calls_boards_on_the_element(self):
-        self.assert_property_called(BoardOperation, "boards")
+    def test_set_collection_gets_the_property_from_the_trello_element(self):
+        self.base_operation.trello_element_property = MagicMock(return_value = "name")
+        self.base_operation.set_collection()
+        self.assertEqual(self.base_operation.collection, self.trello_element.name)
 
-    def test_set_collection_calls_lists_on_the_element(self):
-        self.assert_property_called(ListOperation, "lists")
+class BoardOperationTests(unittest.TestCase):
+    def setUp(self):
+        self.operation, self.trello_element = create_operation(BoardOperation)
 
-    def test_set_collection_calls_cards_on_the_element(self):
-        self.assert_property_called(CardOperation, "cards")
+    def test_trello_element_property(self):
+        self.assertEqual(self.operation.trello_element_property(), "boards")
 
-    def assert_property_called(self, Operation, property_name):
-        element, property_mock = TrelloElementMock.mock_property(property_name)
-        Operation(element).set_collection()
-        property_mock.assert_called_with()
+class ListOperationTests(unittest.TestCase):
+    def setUp(self):
+        self.operation, self.trello_element = create_operation(ListOperation)
+
+    def test_trello_element_property(self):
+        self.assertEqual(self.operation.trello_element_property(), "lists")
+
+class CardOperationTests(unittest.TestCase):
+    def setUp(self):
+        self.operation, self.trello_element = create_operation(CardOperation)
+
+    def test_trello_element_property(self):
+        self.assertEqual(self.operation.trello_element_property(), "cards")
+
+
+# Helper
+def create_operation(Operation):
+    trello_element = TrelloElementMock("Element name")
+    operation = Operation(trello_element)
+    operation.collection = TrelloElementMock.collection()
+    return (operation, trello_element)
+
 
 if __name__ == '__main__':
     unittest.main()

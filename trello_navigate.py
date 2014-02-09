@@ -1,12 +1,13 @@
 from Trello.trello import TrelloCommand
-from Trello.navigator import Navigator
+
+from operations import BoardOperation
 
 class TrelloNavigateCommand(TrelloCommand):
     def work(self, edit):
-        navigator = Navigator(self)
-        navigator.start(self.conn.me)
+        BoardOperation(self.conn.me).execute(self)
 
-    def execute(self, names, callback):
+    def display(self, names, callback = None):
         self.show_quick_panel(names, callback)
 
-
+    def input(self, label, callback = None):
+        self.show_input_panel(label, "", callback)
