@@ -19,23 +19,30 @@ class BaseOperation(Executable):
     def trello_element_property(self):
         return ""
 
-class BoardOperation(BaseOperation):
     def callback(self, index):
-        ListOperation(self.find(index)).execute(self.command)
+        Operation = self.next_operation_class()
+        Operation(self.find(index)).execute(self.command)
 
+    def next_operation_class(self):
+        pass
+
+class BoardOperation(BaseOperation):
     def trello_element_property(self):
         return "boards"
 
-class ListOperation(BaseOperation):
-    def callback(self, index):
-        CardOperation(self.find(index)).execute(self.command)
+    def next_operation_class(self):
+        return ListOperation
 
+class ListOperation(BaseOperation):
     def trello_element_property(self):
         return "lists"
 
-class CardOperation(BaseOperation):
-    def callback(self, index):
-        CardOptions(self.find(index)).execute(self.command)
+    def next_operation_class(self):
+        return CardOperation
 
+class CardOperation(BaseOperation):
     def trello_element_property(self):
         return "cards"
+
+    def next_operation_class(self):
+        return CardOptions
