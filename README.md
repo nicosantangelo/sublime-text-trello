@@ -53,7 +53,6 @@ The package is nowhere near production ready yet, but if you're feeling adventur
 `/usr/local/sbin`, `/sbin`,  `/usr/sbin`, `/usr/local/bin`, `/usr/bin`, or `/bin`).
 
 ## Roadmap for release
-* Ideally CardOptions shouldn't know the Command interface
 * Don't cache requests 
 * Go back option
 * Card description
