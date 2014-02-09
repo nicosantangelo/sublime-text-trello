@@ -57,6 +57,7 @@ The package is nowhere near production ready yet, but if you're feeling adventur
 * Don't cache requests 
 * Go back option
 * Card description
+* Create Card from List
 * Create List from Board
 * Create Board
 * Print the comment somewhere when it's selected from the list of Card comments
