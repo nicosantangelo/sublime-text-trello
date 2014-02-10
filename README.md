@@ -59,7 +59,7 @@ The package is nowhere near production ready yet, but if you're feeling adventur
 * Create Card from List
 * Create List from Board
 * Create Board
-* Print the comment somewhere when it's selected from the list of Card comments
+* ~~Print the comment somewhere when it's selected from the list of Card comments~~ (ouput panel)
 
 ## Thanks to
 * The [Trollop](https://bitbucket.org/btubbs/trollop) Python Library
