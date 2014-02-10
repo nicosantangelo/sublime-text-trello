@@ -4,6 +4,9 @@ from comment_formatter import CommentFormatter
 class CardOptions(Executable):
     def __init__(self, card):
         self.options = [{
+            'name': "Description",
+            'action': self.description
+        }, {
             'name': "Comments",
             'action': self.comments
         }, {
@@ -27,6 +30,10 @@ class CardOptions(Executable):
             option['action']()
 
     # Actions
+    def description(self):
+        card_text = "URL: " + self.card.url + "\n" + self.card.desc
+        self.command.output(card_text)
+
     def comments(self):
         comments_text = CommentFormatter.format(self.card.comments())
         self.command.output(comments_text)
