@@ -13,7 +13,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.setup_data_from_settings()
         
         if not self.token:
-            self.show_output_panel()
+            self.show_output_panel(self.help_text())
             return
 
         self.conn = TrelloConnection(self.key, self.token)
@@ -53,9 +53,9 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.view.window().show_input_panel(caption, initial_text, on_done, on_change, on_cancel)
 
     # Output view
-    def show_output_panel(self):
+    def show_output_panel(self, text):
         self.output_view = self.view.window().get_output_panel("textarea")
-        self.append_to_output_view(self.help_text())
+        self.append_to_output_view(text)
         self.view.window().run_command("show_panel", {"panel": "output.textarea"})
 
     def append_to_output_view(self, text):

@@ -1,4 +1,5 @@
 from executable import Executable
+from comment_formatter import CommentFormatter
 
 class CardOptions(Executable):
     def __init__(self, card):
@@ -27,7 +28,8 @@ class CardOptions(Executable):
 
     # Actions
     def comments(self):
-        self.command.display(self.card.comments())
+        comments_text = CommentFormatter.format(self.card.comments())
+        self.command.output(comments_text)
 
     def comment(self, text = ""):
         if text:
