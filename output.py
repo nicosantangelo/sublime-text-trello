@@ -1,6 +1,10 @@
-class CommentFormatter():
+class Output():
     @classmethod
-    def format(cls, comments):
+    def card(cls, card):
+        return "URL: " + card.url + "\n" + card.desc
+
+    @classmethod
+    def comments(cls, comments):
         comments_text = ""
         if comments:
             for index, comment_str in enumerate(comments):
