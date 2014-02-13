@@ -3,6 +3,8 @@ from .mock import Mock, PropertyMock
 class TrelloElementMock():
     def __init__(self, name):
         self.name = name
+        self.url = "url"
+        self.desc = "desc"
 
     @classmethod
     def collection(cls):
