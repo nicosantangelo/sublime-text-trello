@@ -1,6 +1,6 @@
 import unittest
 from .mock import MagicMock, Mock
-from .util import *
+from .util import TrelloElementMock, CommandMock
 
 from operations import *
 

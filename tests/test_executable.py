@@ -1,7 +1,7 @@
 import unittest
 from .mock import MagicMock
 
-from .util import *
+from .util import CommandMock
 
 from executable import Executable
 

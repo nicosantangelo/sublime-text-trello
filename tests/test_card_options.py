@@ -1,7 +1,7 @@
 import unittest
 from .mock import MagicMock
 
-from .util import *
+from .util import TrelloElementMock
 from card_options import CardOptions
 
 class CardOptionsTests(unittest.TestCase):
