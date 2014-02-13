@@ -1,11 +1,11 @@
 from executable import Executable
-from comment_formatter import CommentFormatter
+from output import Output
 
 class CardOptions(Executable):
     def __init__(self, card):
         self.options = [{
-            'name': "Description",
-            'action': self.description
+            'name': "Show",
+            'action': self.show
         }, {
             'name': "Comments",
             'action': self.comments
@@ -30,13 +30,11 @@ class CardOptions(Executable):
             option['action']()
 
     # Actions
-    def description(self):
-        card_text = "URL: " + self.card.url + "\n" + self.card.desc
-        self.command.output(card_text)
+    def show(self):
+        self.command.output(Output.card(self.card))
 
     def comments(self):
-        comments_text = CommentFormatter.format(self.card.comments())
-        self.command.output(comments_text)
+        self.command.output(Output.comments(self.card.comments()))
 
     def comment(self, text = ""):
         if text:
