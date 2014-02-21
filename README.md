@@ -55,7 +55,7 @@ The package is nowhere near production ready yet, but if you're feeling adventur
 ## Roadmap for release
 * Don't cache requests 
 * Go back option
-* Card description
+* ~~Card description~~
 * Create Card from List
 * Create List from Board
 * Create Board
