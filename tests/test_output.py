@@ -1,6 +1,6 @@
 import unittest
 
-from .util import TrelloElementMock
+from .util import TrelloCardMock
 from output import Output
 
 class OutputTests(unittest.TestCase):
@@ -13,8 +13,18 @@ class OutputTests(unittest.TestCase):
         self.assertEqual(Output.comments(comments), result)
 
     def test_card_returns_the_information_of_the_card(self):
-        card = TrelloElementMock("card name")
-        output = "URL: " + card.url + "\n" + card.desc 
+        card = TrelloCardMock()
+        output = """
+card_name (card_url)
+    card_desc
+
+The card has:
+    2 members
+    2 comments
+    4 votes
+    3 attachments
+    2 labels
+        """
         self.assertEqual(Output.card(card), output)
 
 if __name__ == '__main__':

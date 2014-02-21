@@ -315,10 +315,10 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
     url = Field('url')
     closed = Field()
     name = Field('name')
-    badges = Field()
+    badges = Field('badges')
     checkItemStates = Field()
     desc = Field('desc')
-    labels = Field()
+    labels = Field("labels")
 
     board = ObjectField('idBoard', 'Board')
     list = ObjectField('idList', 'List')

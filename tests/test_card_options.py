@@ -10,7 +10,7 @@ class CardOptionsTests(unittest.TestCase):
         self.card_options = CardOptions(card)
 
     def test_names_returns_the_card_operations(self):
-        self.assertEqual(["Description", "Comments", "Comment", "Archive", "Exit"], self.card_options.names())
+        self.assertEqual(["Show", "Comments", "Comment", "Archive", "Exit"], self.card_options.names())
 
     def test_callback_calls_the_method_at_the_given_index(self):
         action = self.mock_action_at(1)
