@@ -1,5 +1,6 @@
 {
     "key"   : "",
     "secret": "",
-    "token" : ""
+    "token" : "",
+    "use_cache": true
 }

@@ -4,8 +4,8 @@ import sys, os.path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "lib"))
-
-from trollop import TrelloConnection
+    
+import trollop
 
 # A base for each command
 class TrelloCommand(sublime_plugin.TextCommand):
@@ -15,9 +15,12 @@ class TrelloCommand(sublime_plugin.TextCommand):
         if not self.token:
             self.show_output_panel(self.help_text())
             return
+            
+        if not self.use_cache:
+            self.view.run_command("trello_delete_cache")
 
-        self.conn = TrelloConnection(self.key, self.token)
-        self.work(edit)
+        trello_connection = trollop.TrelloConnection(self.key, self.token)
+        self.work(trello_connection.me)
 
     def setup_data_from_settings(self):
         default_settings = sublime.load_settings("Default_app.sublime-settings")
@@ -26,6 +29,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.key    = default_settings.get("key")    or user_settings.get("key")
         self.secret = default_settings.get("secret") or user_settings.get("secret")
         self.token  = user_settings.get("token")
+        self.use_cache = user_settings.get("use_cache", True)
 
     def help_text(self):
         first_half  = "Please go to:\n%s\nand paste the token in the settings." % self.token_url()
