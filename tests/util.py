@@ -1,4 +1,4 @@
-from .mock import Mock, PropertyMock
+from .mock import Mock, MagicMock, PropertyMock
 
 class TrelloElementMock():
     def __init__(self, name):
@@ -15,7 +15,7 @@ class TrelloElementMock():
         setattr(type(element), property_name, property_mock)
         return (element, property_mock)
 
-class TrelloCardMock(object):
+class TrelloCardMock():
     def __init__(self):
         self.name = "card_name"
         self.url  = "card_url"
@@ -28,7 +28,7 @@ class TrelloCardMock(object):
             'attachments': 3
         }
 
-class CommandMock(object):
+class CommandMock():
     def display():
         pass
 
@@ -38,3 +38,20 @@ class CommandMock(object):
     @classmethod
     def create(cls):
         return Mock(spec = CommandMock)
+
+class OperationMock():
+    @classmethod
+    def create(cls, Operation):
+        trello_element = TrelloElementMock("Element name")
+        operation = Operation(trello_element)
+        operation.collection = TrelloElementMock.collection()
+        operation.command = CommandMock()
+        return (operation, trello_element)
+
+    @classmethod
+    def instance(cls, operation):
+        instance_mock = Mock()
+        class_mock = Mock(return_value = instance_mock)
+        operation.next_operation_class = MagicMock(return_value = class_mock)
+        operation.previous_operation = MagicMock(return_value = class_mock)
+        return (class_mock, instance_mock)

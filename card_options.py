@@ -2,24 +2,17 @@ from executable import Executable
 from output import Output
 
 class CardOptions(Executable):
-    def __init__(self, card):
-        self.options = [{
-            'name': "Show",
-            'action': self.show
-        }, {
-            'name': "Comments",
-            'action': self.comments
-        }, {
-            'name': "Comment",
-            'action': self.comment
-        }, {
-            'name': "Archive",
-            'action': self.close
-        }, {
-            'name': "Exit",
-            'action': self.noop
-        }]
+    def __init__(self, card, previous_operation = None):
+        self.options = [
+            { 'name': "..", 'action': self.go_back },
+            { 'name': "Show", 'action': self.show },
+            { 'name': "Comments", 'action': self.comments },
+            { 'name': "Comment", 'action': self.comment },
+            { 'name': "Archive", 'action': self.close },
+            { 'name': "Exit", 'action': self.noop }
+        ]
         self.card = card
+        self.previous_operation = previous_operation
 
     def names(self):
         return [option['name'] for option in self.options]
