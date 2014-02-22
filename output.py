@@ -27,9 +27,9 @@ The card has:
     def comments(cls, comments):
         comments_text = ""
         if comments:
-            for index, comment_str in enumerate(comments):
-                comments_text += str(index + 1) + ") " + comment_str + "\n"
+            for index, comment_dict in enumerate(comments):
+                comments_text += str(index + 1) + ") " + comment_dict['username'] + ": " + comment_dict['text'] + "\n"
         else:
-            comments_text = "The card has no comments"      
+            comments_text = "The card has no comments"
 
         return comments_text
