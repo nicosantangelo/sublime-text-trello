@@ -17,7 +17,7 @@ By default most requests will be cached, to improve performance. So, for example
 To avoid this you have to options, [run][1] the `Trello: Delete cache` command, which will clean the cache and will request everything again *or* you can switch the `use_cache` (which is true by default) option to `false` on your [settings][3], like this:
 
 ````json
-{ use_cache: false }
+{ "use_cache": false }
 ````
 
 ## Generating Your Keys
@@ -59,7 +59,7 @@ Also, if you want to enable only some access to your account, you can modify the
 `Delete cache` does not have a shortcut, but you can set it in `Preferences -> Key Bindings - User` by adding:
 
 ````json
-{ { "keys": ["ctrl+alt+d"], "command": "trello_delete_cache" } }
+{ "keys": ["ctrl+alt+d"], "command": "trello_delete_cache" }
 ````
 
 ## Settings location

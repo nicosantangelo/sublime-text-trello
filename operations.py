@@ -17,7 +17,6 @@ class BaseOperation(Executable):
     def find(self, index):
         return self.collection[index]
 
-
     def trello_element_property(self):
         return ""
 
