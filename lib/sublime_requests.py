@@ -103,7 +103,7 @@ class CurlSession(object):
             for k, v in headers.items():
                 curl_options.extend(['-H', "%s: %s" % (k, v)])
 
-        if method in ('post', 'patch'):
+        if method.lower() in ('post', 'patch'):
             curl_options.extend(['-d', data])
             
         curl_options.extend(['-X', method.upper()])
@@ -116,6 +116,7 @@ class CurlSession(object):
         command = [curl] + curl_options + [url]
 
         logger.debug("CurlSession: invoking curl with %s" % command)
+        
         try:
             command_response = commandline.execute(command)
         except commandline.CommandExecutionError as e:
