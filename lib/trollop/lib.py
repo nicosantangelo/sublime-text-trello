@@ -307,6 +307,15 @@ class Board(LazyTrello, Closable):
     lists = SubList('List')
     members = SubList('Member')
 
+    # TODO: Generalize this pattern, add it to a base class, and make it work
+    # correctly with SubList. Until then....
+    def add_list(self, name):
+        path = self._prefix + self._id + '/lists'
+        body = json.dumps({'name': name, 'idList': self._id,
+                           'key': self._conn.key, 'token': self._conn.token})
+        data = json.loads(self._conn.post(path, body=body))
+        new_list = List(self._conn, data['id'], data)
+        return new_list
 
 class Card(LazyTrello, Closable, Deletable, Labeled):
 
@@ -393,7 +402,16 @@ class Member(LazyTrello):
     cards = SubList('Card')
     notifications = SubList('Notification')
     organizations = SubList('Organization')
-
+    
+    # TODO: Generalize this pattern, add it to a base class, and make it work
+    # correctly with SubList. Until then....
+    def add_board(self, name, organization=None, prefs_permissionLevel="private"):
+        path = '/boards'
+        body = json.dumps({'name': name, 'prefs_permissionLevel': prefs_permissionLevel,
+                           'key': self._conn.key, 'token': self._conn.token})
+        data = json.loads(self._conn.post(path, body=body))
+        board = Board(self._conn, data['id'], data)
+        return board
 
 class Notification(LazyTrello):
 
