@@ -1,5 +1,9 @@
-from executable import Executable
-from output import Output
+try:
+    from executable import Executable
+    from output import Output
+except ImportError:
+    from .executable import Executable
+    from .output import Output
 
 class CardOptions(Executable):
     def __init__(self, card, previous_operation = None):

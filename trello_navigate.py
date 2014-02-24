@@ -1,6 +1,9 @@
-from Trello.trello import TrelloCommand
-
-from operations import BoardOperation
+try:
+    from trello import TrelloCommand
+    from operations import BoardOperation
+except ImportError:
+    from .trello import TrelloCommand
+    from .operations import BoardOperation
 
 class TrelloNavigateCommand(TrelloCommand):
     def work(self, member):
