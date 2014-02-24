@@ -337,7 +337,9 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
 
     def add_comment(self, text):
         path = self._path + '/actions/comments'
-        return self._conn.post(path, dict(text=text))
+        body = json.dumps({'text': text, 'idCard': self._id,
+                           'key': self._conn.key, 'token': self._conn.token})
+        return self._conn.post(path, body=body)
 
     def comments(self):
         path = self._path + '/actions'
