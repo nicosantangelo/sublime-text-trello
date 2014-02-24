@@ -67,21 +67,33 @@ Preferences -> Package Settings -> Trello -> Settings User
 
 ## Instalation
 
-You can download the repo in your `/Packages` (*Preferences -> Browse Packages...*) folder and start using/hacking it. I'll try adding it to [Package Control](http://sublime.wbond.net) once I finish the [Roadmap][2]
+You can download the repo in your `/Packages` (*Preferences -> Browse Packages...*) folder and start using/hacking it. I'll try adding it to [Package Control](http://sublime.wbond.net) soon.
 
 ## Known issues
 
 [Curl](http://curl.haxx.se/) is required for Linux users (it should be on:
 `/usr/local/sbin`, `/sbin`,  `/usr/sbin`, `/usr/local/bin`, `/usr/bin`, or `/bin`).
 
-## Roadmap for release
+
+## Roadmap
+
+* Labels
+* Checklists
+* Port to ST2?
+* The rest of the [Trello API](https://trello.com/docs/index.html)?
 * ~~Don't cache requests~~
 * ~~Go back option~~
 * ~~Card description~~
-* Create Card from List
-* Create List from Board
-* Create Board
+* ~~Create Card from List~~
+* ~~Create List from Board~~
+* ~~Create Board~~
 * ~~Print the comment somewhere when it's selected from the list of Card comments~~ (ouput panel)
+
+## Any idea?
+
+* Pull requests are more than welcome, you can run the tests using the [AAAPT Package](https://github.com/guillermooo/AAAPT) or in the terminal (for example: `cd path/to/Trello && python3 -m tests.test_output`).
+
+* Another way would be adding an [issue](https://github.com/NicoSantangelo/sublime-text-trello/issues) with your feature request.
 
 ## Thanks to
 * The [Trollop](https://bitbucket.org/btubbs/trollop) Python Library
