@@ -1,5 +1,9 @@
 [{
-  "id": "trelloboardnames",
+  "id": "trellonavigate",
   "caption": "Trello: Navigate",
-  "command": "navigate"
+  "command": "trello_navigate"
+}, {
+  "id": "trellodeletecache",
+  "caption": "Trello: Delete cache",
+  "command": "trello_delete_cache"
 }]
