@@ -14,7 +14,7 @@ If you [run][1] the `Trello: Navigate` command, you'll see your boards, and from
 
 By default most requests will be cached, to improve performance. So, for example if you get the Lists of a Board, do something else, and re-run the command, the lists will be cached.
 
-To avoid this you have to options, [run][1] the `Trello: Delete cache` command, which will clean the cache and will request everything again *or* you can switch the `use_cache` (which is true by default) option to `false` on your [settings][3], like this:
+To avoid this you have two options, [run][1] the `Trello: Delete cache` command, which will clean the cache and will request everything again *or* you can switch the `use_cache` (which is true by default) option to `false` on your [settings][3], like this:
 
 ````json
 { "use_cache": false }
@@ -23,7 +23,7 @@ To avoid this you have to options, [run][1] the `Trello: Delete cache` command, 
 ## Generating Your Keys
 By default the package uses a Trello app generated only to be used here. If the `token` isn't present the package will pop up a message telling you how to get it.
 
-Basically because of the way Trello authentication works, you'll need to copy a url in your browser and copy-pase back the result given in the `token` property of the [settings][3], for example:
+Basically because of the way Trello authentication works, you'll need to copy a url in your browser and pase the result in the `token` property of the [settings][3], for example:
 
 Url:
 
