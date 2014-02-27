@@ -67,7 +67,19 @@ Preferences -> Package Settings -> Trello -> Settings User
 
 ## Instalation
 
-You can download the repo in your `/Packages` (*Preferences -> Browse Packages...*) folder and start using/hacking it. I'll try adding it to [Package Control](http://sublime.wbond.net) soon.
+### PackageControl
+If you have [PackageControl](http://wbond.net/sublime_packages/package_control) installed, you can use that to install the package.
+
+Just type `cmd-shift-p`/`ctrl-shift-p` to bring up the command pallate and pick `Package Control: Install Package` from the dropdown.
+
+Then type `Trello` and choose this package from the dropdown. That's it!
+
+### Manual
+
+You can clone the repo in your `/Packages` (*Preferences -> Browse Packages...*) folder and start using/hacking it.
+    
+    cd ~/path/to/Packages
+    git clone git://github.com/NicoSantangelo/sublime-text-trello.git Trello
 
 ## Known issues
 
