@@ -41,7 +41,7 @@ Options:
 }
 ````
 
-If you don't want to use the default app, you can change it by adding your own key and secret to the json [settings][3]. You can get them from [here](https://trello.com/1/appKey/generate) (it doesn't event require a click).
+If you don't want to use the default app, you can change it by adding your own key and secret to the json [settings][3]. You can get them from [here](https://trello.com/1/appKey/generate).
 
 Also, if you want to enable only some access to your account, you can modify the scope of the url, for example from `&scope=read,write` to `&scope=read` 
 
