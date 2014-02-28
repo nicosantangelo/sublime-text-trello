@@ -14,7 +14,7 @@ If you [run][1] the `Trello: Navigate` command, you'll see your boards, and from
 
 By default most requests will be cached, to improve performance. So, for example if you get the Lists of a Board, do something else, and re-run the command, the lists will be cached.
 
-To avoid this you have to options, [run][1] the `Trello: Delete cache` command, which will clean the cache and will request everything again *or* you can switch the `use_cache` (which is true by default) option to `false` on your [settings][3], like this:
+To avoid this you have two options, [run][1] the `Trello: Delete cache` command, which will clean the cache and will request everything again *or* you can switch the `use_cache` (which is true by default) option to `false` on your [settings][3], like this:
 
 ````json
 { "use_cache": false }
@@ -23,7 +23,7 @@ To avoid this you have to options, [run][1] the `Trello: Delete cache` command, 
 ## Generating Your Keys
 By default the package uses a Trello app generated only to be used here. If the `token` isn't present the package will pop up a message telling you how to get it.
 
-Basically because of the way Trello authentication works, you'll need to copy a url in your browser and copy-pase back the result given in the `token` property of the [settings][3], for example:
+Basically because of the way Trello authentication works, you'll need to copy a url in your browser and pase the result in the `token` property of the [settings][3], for example:
 
 Url:
 
@@ -41,7 +41,7 @@ Options:
 }
 ````
 
-If you don't want to use the default app, you can change it by adding your own key and secret to the json [settings][3]. You can get them from [here](https://trello.com/1/appKey/generate) (it doesn't event require a click).
+If you don't want to use the default app, you can change it by adding your own key and secret to the json [settings][3]. You can get them from [here](https://trello.com/1/appKey/generate).
 
 Also, if you want to enable only some access to your account, you can modify the scope of the url, for example from `&scope=read,write` to `&scope=read` 
 
@@ -67,7 +67,19 @@ Preferences -> Package Settings -> Trello -> Settings User
 
 ## Instalation
 
-You can download the repo in your `/Packages` (*Preferences -> Browse Packages...*) folder and start using/hacking it. I'll try adding it to [Package Control](http://sublime.wbond.net) soon.
+### PackageControl
+If you have [PackageControl](http://wbond.net/sublime_packages/package_control) installed, you can use that to install the package.
+
+Just type `cmd-shift-p`/`ctrl-shift-p` to bring up the command pallate and pick `Package Control: Install Package` from the dropdown.
+
+Then type `Trello` and choose this package from the dropdown. That's it!
+
+### Manual
+
+You can clone the repo in your `/Packages` (*Preferences -> Browse Packages...*) folder and start using/hacking it.
+    
+    cd ~/path/to/Packages
+    git clone git://github.com/NicoSantangelo/sublime-text-trello.git Trello
 
 ## Known issues
 
