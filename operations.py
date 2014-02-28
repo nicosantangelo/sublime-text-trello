@@ -13,9 +13,12 @@ class BaseOperation(Executable):
         self.trello_element = trello_element
         self.previous_operation = previous_operation
 
-    def names(self):
+    def items(self):
         self.set_collection()
-        return self.custom_actions.encapsulate([element.name for element in self.collection])
+        return self.custom_actions.encapsulate(self.names())
+
+    def names(self):
+        return [element.name for element in self.collection]
 
     def trello_element_name(self):
         return self.__class__.__name__.replace("Operation", "")

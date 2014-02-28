@@ -9,8 +9,9 @@ class CardOptionsTests(unittest.TestCase):
         card = TrelloElementMock("card_name")
         self.card_options = CardOptions(card)
 
-    def test_names_returns_the_card_operations(self):
-        self.assertEqual(["..", "Show", "Comments", "Comment", "Archive", "Exit"], self.card_options.names())
+    def test_items_returns_the_card_operations(self):
+        options = ["..", "Show", "Comments", "Comment", "Archive", "Exit"]
+        self.assertEqual(options, self.card_options.items())
 
     def test_callback_calls_the_method_at_the_given_index(self):
         action = self.mock_action_at(1)

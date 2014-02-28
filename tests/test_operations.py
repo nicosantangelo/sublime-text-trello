@@ -9,13 +9,16 @@ class BaseOperationTests(unittest.TestCase):
         self.base_operation, self.trello_element = OperationMock.create(BaseOperation)
         self.class_mock, self.instance_mock = OperationMock.instance(self.base_operation)
 
-    def test_names_sets_the_collection(self):
+    def test_items_sets_the_collection(self):
         self.base_operation.set_collection = MagicMock()
-        self.base_operation.names()
+        self.base_operation.items()
         self.base_operation.set_collection.assert_called_with()
 
-    def test_names_returns_every_name_from_the_collection_with_the_added_options(self):
-        self.assertEqual(self.base_operation.names(), ["..", "Create Base", "first", "second", "Exit"])
+    def test_items_returns_every_name_from_the_collection_with_the_added_options(self):
+        self.assertEqual(self.base_operation.items(), ["..", "Create Base", "first", "second", "Exit"])
+
+    def test_names_returns_every_name_from_the_collection(self):
+        self.assertEqual(self.base_operation.names(), ["first", "second"])
 
     def test_set_collection_gets_the_property_from_the_trello_element(self):
         self.base_operation.trello_element_property = MagicMock(return_value = "name")
@@ -50,8 +53,8 @@ class BoardOperationTests(unittest.TestCase):
     def setUp(self):
         self.operation, self.trello_element = OperationMock.create(BoardOperation)
 
-    def test_names_returns_every_name_from_the_collection_without_goback(self):
-        self.assertEqual(self.operation.names(), ["Create Board", "first", "second", "Exit"])
+    def test_items_returns_every_name_from_the_collection_without_goback(self):
+        self.assertEqual(self.operation.items(), ["Create Board", "first", "second", "Exit"])
 
     def test_trello_element_property(self):
         self.assertEqual(self.operation.trello_element_property(), "boards")

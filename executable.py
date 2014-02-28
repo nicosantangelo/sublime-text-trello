@@ -1,10 +1,10 @@
 class Executable():
     def execute(self, command = None):
         self.command = command or self.command
-        self.command.display(self.names(), self.callback)
+        self.command.display(self.items(), self.callback)
         return self
 
-    def names(self):
+    def items(self):
         return [""]
 
     def callback(self):

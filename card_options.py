@@ -18,7 +18,7 @@ class CardOptions(Executable):
         self.card = card
         self.previous_operation = previous_operation
 
-    def names(self):
+    def items(self):
         return [option['name'] for option in self.options]
 
     def callback(self, index):
@@ -44,3 +44,4 @@ class CardOptions(Executable):
 
     def noop(self):
         pass
+
