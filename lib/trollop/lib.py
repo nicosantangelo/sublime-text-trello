@@ -347,6 +347,12 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
         comments_json = json.loads(response)
         return [ { 'text': c["data"]["text"], 'username': c["memberCreator"]["username"] } for c in comments_json]
 
+    def move_to_list(self, list_id):
+        path = self._prefix + self._id + '/idList'
+        body = json.dumps({'value': list_id,
+                           'key': self._conn.key, 'token': self._conn.token})
+        return self._conn.put(path, body=body)
+
 class Checklist(LazyTrello):
 
     _prefix = '/checklists/'
