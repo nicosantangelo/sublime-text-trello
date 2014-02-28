@@ -8,6 +8,8 @@ class BaseOperationTests(unittest.TestCase):
     def setUp(self):
         self.base_operation, self.trello_element = OperationMock.create(BaseOperation)
         self.class_mock, self.instance_mock = OperationMock.instance(self.base_operation)
+        self.collection = TrelloElementMock.collection()
+        self.base_operation.collection = TrelloCollection(self.collection)
 
     def test_items_sets_the_collection(self):
         self.base_operation.set_collection = MagicMock()
@@ -15,28 +17,18 @@ class BaseOperationTests(unittest.TestCase):
         self.base_operation.set_collection.assert_called_with()
 
     def test_items_returns_every_name_from_the_collection_with_the_added_options(self):
+        self.base_operation.set_collection = MagicMock()
         self.assertEqual(self.base_operation.items(), ["..", "Create Base", "first", "second", "Exit"])
-
-    def test_names_returns_every_name_from_the_collection(self):
-        self.assertEqual(self.base_operation.names(), ["first", "second"])
-
-    def test_set_collection_gets_the_property_from_the_trello_element(self):
-        self.base_operation.trello_element_property = MagicMock(return_value = "name")
-        self.base_operation.set_collection()
-        self.assertEqual(self.base_operation.collection, self.trello_element.name)
-
-    def test_find_gets_an_element_from_the_collection_by_index(self):
-        self.assertEqual(self.base_operation.find(1), self.base_operation.collection[1])
 
     def test_callback_uses_find_to_instantiate_the_operation_if_the_index_is_in_the_collection(self):
         self.base_operation.callback(2)
-        self.class_mock.assert_called_with(self.base_operation.collection[0], self.base_operation)
+        self.class_mock.assert_called_with(self.collection[0], self.base_operation)
 
     def test_callback_calls_execute_on_the_operation(self):
         self.base_operation.callback(2)
         self.instance_mock.execute.assert_called_with(self.base_operation.command)
 
-    def test_callback_doesnt_call_find__if_the_index_is_bigger_than_the_collection_length(self):
+    def test_callback_doesnt_call_find_if_the_index_is_bigger_than_the_collection_length(self):
         big_index = 55
         self.base_operation.callback(big_index)
         assert not self.class_mock.called
@@ -52,8 +44,10 @@ class BaseOperationTests(unittest.TestCase):
 class BoardOperationTests(unittest.TestCase):
     def setUp(self):
         self.operation, self.trello_element = OperationMock.create(BoardOperation)
+        self.operation.collection = TrelloCollection(TrelloElementMock.collection())
 
     def test_items_returns_every_name_from_the_collection_without_goback(self):
+        self.operation.set_collection = MagicMock()
         self.assertEqual(self.operation.items(), ["Create Board", "first", "second", "Exit"])
 
     def test_trello_element_property(self):

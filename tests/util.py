@@ -44,7 +44,6 @@ class OperationMock():
     def create(cls, Operation):
         trello_element = TrelloElementMock("Element name")
         operation = Operation(trello_element)
-        operation.collection = TrelloElementMock.collection()
         operation.command = CommandMock.create()
         return (operation, trello_element)
 
@@ -55,3 +54,4 @@ class OperationMock():
         operation.next_operation_class = MagicMock(return_value = class_mock)
         operation.previous_operation = MagicMock(return_value = class_mock)
         return (class_mock, instance_mock)
+

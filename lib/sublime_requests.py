@@ -103,7 +103,7 @@ class CurlSession(object):
             for k, v in headers.items():
                 curl_options.extend(['-H', "%s: %s" % (k, v)])
 
-        if method.lower() in ('post', 'patch', 'put'):
+        if method.lower() in ('post', 'patch', 'put') and not data is None:
             curl_options.extend(['-d', data])
             
         curl_options.extend(['-X', method.upper()])

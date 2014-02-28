@@ -1,9 +1,11 @@
 try:
     from executable import Executable
+    from trello_collection import TrelloCollection
     from card_options import CardOptions
     from custom_actions import CustomActions
 except ImportError:
     from .executable import Executable
+    from .trello_collection import TrelloCollection
     from .card_options import CardOptions
     from .custom_actions import CustomActions
 
@@ -15,20 +17,16 @@ class BaseOperation(Executable):
 
     def items(self):
         self.set_collection()
-        return self.custom_actions.encapsulate(self.names())
-
-    def names(self):
-        return [element.name for element in self.collection]
-
-    def trello_element_name(self):
-        return self.__class__.__name__.replace("Operation", "")
+        return self.custom_actions.encapsulate(self.collection.names())
 
     def set_collection(self):
-        if hasattr(self.trello_element, self.trello_element_property()):
-            self.collection = getattr(self.trello_element, self.trello_element_property())
+        self.collection = TrelloCollection(self.trello_element, self.trello_element_property())
 
     def trello_element_property(self):
         return ""
+        
+    def trello_element_name(self):
+        return self.__class__.__name__.replace("Operation", "")
 
     def callback(self, index):
         if self.custom_actions.has(index):
@@ -43,18 +41,12 @@ class BaseOperation(Executable):
         pass
 
     def execute_command(self, index):
-        if self.collection_has(index):
+        if self.collection.has(index):
             Operation = self.next_operation_class()
-            Operation(self.find(index), self).execute(self.command)
-
-    def collection_has(self, index):
-        return len(self.collection) > index
+            Operation(self.collection.find(index), self).execute(self.command)
 
     def next_operation_class(self):
         pass
-
-    def find(self, index):
-        return self.collection[index]
 
 class BoardOperation(BaseOperation):
     def __init__(self, trello_element, previous_operation = None):

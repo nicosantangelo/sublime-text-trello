@@ -347,9 +347,9 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
         comments_json = json.loads(response)
         return [ { 'text': c["data"]["text"], 'username': c["memberCreator"]["username"] } for c in comments_json]
 
-    def move_to_list(self, list_id):
+    def move_to_list(self, list):
         path = self._prefix + self._id + '/idList'
-        body = json.dumps({'value': list_id,
+        body = json.dumps({'value': list._id,
                            'key': self._conn.key, 'token': self._conn.token})
         return self._conn.put(path, body=body)
 
