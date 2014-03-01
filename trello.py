@@ -46,10 +46,6 @@ class TrelloCommand(sublime_plugin.TextCommand):
     def work(self, edit):
         pass
 
-    # Helpers
-    def async(self, fn, delay):
-        sublime.set_timeout_async(fn, delay)
-
     # Panels and message
     def display_message(self, text):
         sublime.active_window().active_view().set_status("trello", text)
@@ -70,3 +66,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.output_view.set_read_only(False)
         self.output_view.run_command("append", { "characters": text })
         self.output_view.set_read_only(True)
+
+    # Helpers
+    def async(self, fn, delay):
+        sublime.set_timeout_async(fn, delay)

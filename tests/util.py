@@ -3,6 +3,7 @@ from .mock import Mock, MagicMock, PropertyMock
 class TrelloElementMock():
     def __init__(self, name):
         self.name = name
+        self.closed = False
 
     @classmethod
     def collection(cls):
