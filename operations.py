@@ -39,7 +39,11 @@ class BaseOperation(Executable):
 
     def deferred_add(self, text = None):
         if text:
-            self.command.defer(lambda: self.add(text))
+            self.command.defer(lambda: self.base_add(text))
+
+    def base_add(self, text):
+        self.add(text)
+        self.trello_element.reload()
 
     def add(self, text):
         pass

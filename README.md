@@ -12,13 +12,17 @@ If you [run][1] the `Trello: Navigate` command, you'll see your boards, and from
 
 ### Cache
 
-By default most requests will be cached, to improve performance. So, for example if you get the Lists of a Board, do something else, and re-run the command, the lists will be cached.
+By default most requests will be cached, to improve performance. When you do an action that requires the element to be realoaded, for example creating a new card in a list, the package will try to delete only that cache, maintaining the rest.
+
+But if you make changes in the web version or by some chance elements remain cached, changes will not be reflected.
 
 To avoid this you have two options, [run][1] the `Trello: Delete cache` command, which will clean the cache and will request everything again *or* you can switch the `use_cache` (which is true by default) option to `false` on your [settings][3], like this:
 
 ````json
 { "use_cache": false }
 ````
+
+which is not really recommended because the package will request everything on *every* request, but it's an option just in case.
 
 ## Generating Your Keys
 By default the package uses a Trello app generated only to be used here. If the `token` isn't present the package will pop up a message telling you how to get it.

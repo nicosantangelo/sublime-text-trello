@@ -5,6 +5,9 @@ class TrelloElementMock():
         self.name = name
         self.closed = False
 
+    def reload(self):
+        pass
+
     @classmethod
     def collection(cls):
         return [TrelloElementMock("first"), TrelloElementMock("second")]

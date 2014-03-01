@@ -41,6 +41,14 @@ class BaseOperationTests(unittest.TestCase):
         self.base_operation.callback(1)
         self.base_operation.command.input.assert_called_with("Name", self.base_operation.deferred_add)
 
+    def test_base_add_calls_add_with_the_text_and_cleans_the_cache_for_the_element(self):
+        text = "Text"
+        self.base_operation.add = MagicMock()
+        self.base_operation.trello_element.reload = MagicMock()
+        self.base_operation.base_add(text)
+        self.base_operation.add.assert_called_with(text)
+        self.trello_element.reload.assert_called_with()
+
 class BoardOperationTests(unittest.TestCase):
     def setUp(self):
         self.operation, self.trello_element = OperationMock.create(BoardOperation)

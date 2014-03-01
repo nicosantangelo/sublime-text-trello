@@ -297,7 +297,7 @@ class Board(LazyTrello, Closable):
     pinned = Field()
     prefs = Field()
     desc = Field()
-    closed = Field()
+    closed = Field('closed')
 
     organization = ObjectField('idOrganization', 'Organization')
 
@@ -317,12 +317,15 @@ class Board(LazyTrello, Closable):
         new_list = List(self._conn, data['id'], data)
         return new_list
 
+    def reload(self):
+        Board.lists = SubList('List')
+
 class Card(LazyTrello, Closable, Deletable, Labeled):
 
     _prefix = '/cards/'
 
     url = Field('url')
-    closed = Field()
+    closed = Field('closed')
     name = Field('name')
     badges = Field('badges')
     checkItemStates = Field()
@@ -353,6 +356,9 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
                            'key': self._conn.key, 'token': self._conn.token})
         return self._conn.put(path, body=body)
 
+    def reload(self):
+        Card.badges = Field('badges')
+
 class Checklist(LazyTrello):
 
     _prefix = '/checklists/'
@@ -380,7 +386,7 @@ class List(LazyTrello, Closable):
 
     _prefix = '/lists/'
 
-    closed = Field()
+    closed = Field('closed')
     name = Field('name')
     url = Field()
     board = ObjectField('idBoard', 'Board')
@@ -396,6 +402,9 @@ class List(LazyTrello, Closable):
         card = Card(self._conn, data['id'], data)
         return card
 
+    def reload(self):
+        List.board = ObjectField('idBoard', 'Board')
+        List.cards = SubList('Card')
 
 class Member(LazyTrello):
 
@@ -420,6 +429,9 @@ class Member(LazyTrello):
         data = json.loads(self._conn.post(path, body=body))
         board = Board(self._conn, data['id'], data)
         return board
+
+    def reload(self):
+        Member.boards = SubList('Board')
 
 class Notification(LazyTrello):
 

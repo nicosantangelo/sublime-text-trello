@@ -49,9 +49,11 @@ class CardOptions(Executable):
         else:
             selected_list = self.list_collection.find(index)
             self.command.defer(lambda: self.card.move_to_list(selected_list))
+            selected_list.reload()
 
     def close(self):
         self.card.close()
+        self.card.list.reload()
 
     def noop(self):
         pass
