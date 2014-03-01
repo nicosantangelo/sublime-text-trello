@@ -1,13 +1,14 @@
 import unittest
 from .mock import MagicMock
 
-from .util import TrelloElementMock
+from .util import TrelloElementMock, CommandMock
 from card_options import CardOptions
 
 class CardOptionsTests(unittest.TestCase):
     def setUp(self):
         card = TrelloElementMock("card_name")
         self.card_options = CardOptions(card)
+        self.card_options.command = CommandMock()
 
     def test_items_returns_the_card_operations(self):
         options = ["..", "Show", "Comments", "Comment", "Move to another List", "Archive", "Exit"]

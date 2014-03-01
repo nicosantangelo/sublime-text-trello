@@ -35,6 +35,9 @@ class CommandMock():
     def input():
         pass
 
+    def defer(self, fn):
+        fn()
+
     @classmethod
     def create(cls):
         return Mock(spec = CommandMock)

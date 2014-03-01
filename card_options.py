@@ -27,7 +27,7 @@ class CardOptions(Executable):
     def callback(self, index):
         option = self.options[index]
         if not option is None:
-            option['action']()
+            self.command.defer(option['action'])
 
     # Actions
     def show(self):
@@ -36,19 +36,19 @@ class CardOptions(Executable):
     def comments(self):
         self.command.output(Output.comments(self.card.comments()))
 
-    def comment(self, text = ""):
-        if text:
-            self.card.add_comment(text)
-        else:
+    def comment(self, text = None):
+        if text is None:
             self.command.input("Comment text", self.comment)
+        else:
+            self.command.defer(lambda: self.card.add_comment(text))
 
     def move(self, index = None):
-        if not index is None:
-            selected_list = self.list_collection.find(index)
-            self.card.move_to_list(selected_list)
-        else:
+        if index is None:
             self.list_collection = TrelloCollection(self.card.board, "lists")
             self.command.display(self.list_collection.names(), self.move)
+        else:
+            selected_list = self.list_collection.find(index)
+            self.command.defer(lambda: self.card.move_to_list(selected_list))
 
     def close(self):
         self.card.close()
