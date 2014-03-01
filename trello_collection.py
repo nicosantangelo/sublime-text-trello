@@ -6,7 +6,7 @@ class TrelloCollection():
             self.elements = trello_element
 
     def has(self, index):
-        return len(self.elements) > index
+        return len(self.elements) > index and index >= 0
 
     def find(self, index):
         return self.elements[index]

@@ -12,7 +12,7 @@ class CustomActions():
         return self.prefix_methods[index]()
 
     def has(self, index):
-        return self.len() > index
+        return self.len() > index and index >= 0
 
     def len(self):
         return len(self.prefixes)
