@@ -35,9 +35,13 @@ class BaseOperation(Executable):
             self.execute_command(index - self.custom_actions.len())
 
     def get_name(self):
-        self.command.input("Name", self.add)
+        self.command.input("Name", self.deferred_add)
 
-    def add(self, text = None):
+    def deferred_add(self, text = None):
+        if text:
+            self.command.defer(lambda: self.add(text))
+
+    def add(self, text):
         pass
 
     def execute_command(self, index):
@@ -59,9 +63,8 @@ class BoardOperation(BaseOperation):
     def next_operation_class(self):
         return ListOperation
 
-    def add(self, text = None):
-        if text:
-            self.trello_element.add_board(text)
+    def add(self, text):
+        self.trello_element.add_board(text)
 
 class ListOperation(BaseOperation):
     def trello_element_property(self):
@@ -70,9 +73,8 @@ class ListOperation(BaseOperation):
     def next_operation_class(self):
         return CardOperation
 
-    def add(self, text = None):
-        if text:
-            self.trello_element.add_list(text)
+    def add(self, text):
+        self.trello_element.add_list(text)
 
 class CardOperation(BaseOperation):
     def trello_element_property(self):
@@ -81,6 +83,5 @@ class CardOperation(BaseOperation):
     def next_operation_class(self):
         return CardOptions
 
-    def add(self, text = None):
-        if text:
-            self.trello_element.add_card(text)
+    def add(self, text):
+        self.trello_element.add_card(text)

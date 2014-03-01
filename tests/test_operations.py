@@ -37,9 +37,9 @@ class BaseOperationTests(unittest.TestCase):
         self.base_operation.callback(0)
         self.base_operation.previous_operation.execute.assert_called_with()
 
-    def test_callback_calls_the_input_method_on_the_command_with_add_as_callback_if_index_is_1(self):
+    def test_callback_calls_the_input_method_on_the_command_with_deferred_add_as_callback_if_index_is_1(self):
         self.base_operation.callback(1)
-        self.base_operation.command.input.assert_called_with("Name", self.base_operation.add)
+        self.base_operation.command.input.assert_called_with("Name", self.base_operation.deferred_add)
 
 class BoardOperationTests(unittest.TestCase):
     def setUp(self):
@@ -58,9 +58,9 @@ class BoardOperationTests(unittest.TestCase):
         self.operation.callback(5)
         self.operation.execute_command.assert_called_with(4)
 
-    def test_callback_calls_the_input_method_on_the_command_with_add_as_callback_if_index_is_0(self):
+    def test_callback_calls_the_input_method_on_the_command_with_deferred_add_as_callback_if_index_is_0(self):
         self.operation.callback(0)
-        self.operation.command.input.assert_called_with("Name", self.operation.add)
+        self.operation.command.input.assert_called_with("Name", self.operation.deferred_add)
 
     def test_next_operation_class(self):
         self.assertEqual(self.operation.next_operation_class(), ListOperation)

@@ -17,3 +17,6 @@ class TrelloNavigateCommand(TrelloCommand):
 
     def input(self, label, callback = None):
         self.show_input_panel(label, "", callback)
+
+    def defer(self, fn):
+        self.async(fn, 0)
