@@ -32,7 +32,7 @@ class BaseOperation(Executable):
         if self.custom_actions.has(index):
             self.custom_actions.call(index)
         else:
-            self.execute_command(index - self.custom_actions.len())
+            self.command.defer(lambda: self.execute_command(index - self.custom_actions.len()))
 
     def get_name(self):
         self.command.input("Name", self.deferred_add)

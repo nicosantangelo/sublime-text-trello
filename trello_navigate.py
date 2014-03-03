@@ -6,8 +6,11 @@ except ImportError:
     from .operations import BoardOperation
 
 class TrelloNavigateCommand(TrelloCommand):
-    def work(self, member):
-        BoardOperation(member).execute(self)
+    def work(self, connection):
+        self.defer(lambda: self.start(connection))
+
+    def start(self, connection):
+        BoardOperation(connection.me).execute(self)
 
     def display(self, names, callback = None):
         self.show_quick_panel(names, callback)

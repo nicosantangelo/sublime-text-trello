@@ -51,7 +51,7 @@ class OperationMock():
     def create(cls, Operation):
         trello_element = TrelloElementMock("Element name")
         operation = Operation(trello_element)
-        operation.command = CommandMock.create()
+        operation.command = CommandMock()
         return (operation, trello_element)
 
     @classmethod

@@ -5,6 +5,8 @@ import sys, os.path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "lib"))
     
+from progress_notifier import ProgressNotifier
+
 import trollop
 
 # A base for each command
@@ -20,7 +22,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
             self.view.run_command("trello_delete_cache")
 
         trello_connection = trollop.TrelloConnection(self.key, self.token)
-        self.work(trello_connection.me)
+        self.work(trello_connection)
 
     def setup_data_from_settings(self):
         default_settings = sublime.load_settings("Default_app.sublime-settings")
@@ -69,4 +71,9 @@ class TrelloCommand(sublime_plugin.TextCommand):
 
     # Helpers
     def async(self, fn, delay):
-        sublime.set_timeout_async(fn, delay)
+        self.progress = ProgressNotifier('Trello: Working')
+        sublime.set_timeout_async(lambda: self.call(fn), delay)
+
+    def call(self, fn):
+        fn()
+        self.progress.stop()

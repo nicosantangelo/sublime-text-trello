@@ -38,6 +38,7 @@ class BaseOperationTests(unittest.TestCase):
         self.base_operation.previous_operation.execute.assert_called_with()
 
     def test_callback_calls_the_input_method_on_the_command_with_deferred_add_as_callback_if_index_is_1(self):
+        self.base_operation.command.input = MagicMock()
         self.base_operation.callback(1)
         self.base_operation.command.input.assert_called_with("Name", self.base_operation.deferred_add)
 
@@ -67,6 +68,7 @@ class BoardOperationTests(unittest.TestCase):
         self.operation.execute_command.assert_called_with(4)
 
     def test_callback_calls_the_input_method_on_the_command_with_deferred_add_as_callback_if_index_is_0(self):
+        self.operation.command.input = MagicMock()
         self.operation.callback(0)
         self.operation.command.input.assert_called_with("Name", self.operation.deferred_add)
 
