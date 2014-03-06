@@ -7,9 +7,6 @@ except ImportError:
 
 class TrelloNavigateCommand(TrelloCommand):
     def work(self, connection):
-        self.defer(lambda: self.start(connection))
-
-    def start(self, connection):
         BoardOperation(connection.me).execute(self)
 
     def display(self, names, callback = None):
@@ -20,6 +17,3 @@ class TrelloNavigateCommand(TrelloCommand):
 
     def input(self, label, callback = None):
         self.show_input_panel(label, "", callback)
-
-    def defer(self, fn):
-        self.async(fn, 0)

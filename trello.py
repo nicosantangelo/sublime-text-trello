@@ -22,7 +22,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
             self.view.run_command("trello_delete_cache")
 
         trello_connection = trollop.TrelloConnection(self.key, self.token)
-        self.work(trello_connection)
+        self.defer(lambda: self.work(trello_connection))
 
     def setup_data_from_settings(self):
         default_settings = sublime.load_settings("Default_app.sublime-settings")
@@ -45,7 +45,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         return "https://trello.com/1/appKey/generate"
 
     # Main method, override
-    def work(self, edit):
+    def work(self, connection):
         pass
 
     # Panels and message
@@ -70,6 +70,9 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.output_view.set_read_only(True)
 
     # Helpers
+    def defer(self, fn):
+        self.async(fn, 0)
+        
     def async(self, fn, delay):
         self.progress = ProgressNotifier('Trello: Working')
         sublime.set_timeout_async(lambda: self.call(fn), delay)
