@@ -10,6 +10,20 @@ This package allows you to navigate the data Trello provides using the Trello AP
 
 If you [run][1] the `Trello: Navigate` command, you'll see your boards, and from there you can go into the Trello element structure `(Board -> List -> Card -> Actions)`.
 
+### Unread notifications
+
+When you [run][1] `Trello: Unread Notifications`, you'll see the amount of unread notifications the current user has, and a *little* description of what happened, for example:
+
+````
+Total unread: 1
+
+1) Nofitication type: commentCard
+Card: Some Card
+Board: Some Board
+````
+
+This could be improved a lot, but I think it's understandable (with a little bit of brain parsing) and I prefer adding some other stuff before making it prettier (pull requests are welcome!).
+
 ### Cache
 
 By default most requests will be cached, to improve performance. When you do an action that requires the element to be realoaded, for example creating a new card in a list, the package will try to delete only that cache, maintaining the rest.
@@ -54,10 +68,12 @@ Also, if you want to enable only some access to your account, you can modify the
 **Windows and Linux:**
 
  * Navigate: `ctrl+alt+t`
+ * Unread notifications: `ctrl+alt+n`
 
 **OSX**
 
  * Navigate: `super+alt+t`
+ * Unread notifications: `super+alt+n`
 
 
 `Delete cache` does not have a shortcut, but you can set it in `Preferences -> Key Bindings - User` by adding:
