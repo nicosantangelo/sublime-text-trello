@@ -32,6 +32,11 @@ class TrelloCardMock():
             'attachments': 3
         }
 
+class TrelloNotificationMock():
+    def __init__(self, type, data):
+        self.type = type
+        self.data = data
+
 class CommandMock():
     def display():
         pass

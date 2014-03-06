@@ -1,6 +1,6 @@
 import unittest
 
-from .util import TrelloCardMock
+from .util import TrelloCardMock, TrelloNotificationMock
 from output import Output
 
 class OutputTests(unittest.TestCase):
@@ -28,6 +28,22 @@ The card has:
     2 labels
         """
         self.assertEqual(Output.card(card), output)
+
+    def test_notifications_shows_the_available_information_and_the_amount(self):
+        notification1 = TrelloNotificationMock("addedToBoard", { 'board': { 'name': 'Some board Name' } })
+        notification2 = TrelloNotificationMock("commentCard", { 'card': { 'name': 'Some card name' } })
+        notifications = [notification1, notification2]
+
+        output = """Total unread: 2
+
+1) Nofitication type: addedToBoard
+Board: Some board Name
+
+2) Nofitication type: commentCard
+Card: Some card name"""
+
+        self.assertEqual(Output.notifications(notifications), output)
+
 
 if __name__ == '__main__':
     unittest.main()

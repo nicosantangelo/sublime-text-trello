@@ -28,8 +28,26 @@ The card has:
         comments_text = ""
         if comments:
             for index, comment_dict in enumerate(comments):
-                comments_text += str(index + 1) + ") " + comment_dict['username'] + ": " + comment_dict['text'] + "\n"
+                comments_text += cls.as_list_item(index) + comment_dict['username'] + ": " + comment_dict['text'] + "\n"
         else:
             comments_text = "The card has no comments"
 
         return comments_text
+
+    @classmethod
+    def notifications(cls, notifications):
+        output = "Total unread: " + str(len(notifications))
+        for index, notification in enumerate(notifications):
+            output += "\n\n" + cls.as_list_item(index) + "Nofitication type: " + notification.type + "\n"
+            output += cls.notification(notification)
+
+        return output
+
+    @classmethod
+    def notification(cls, notification):
+        output_array = [key.capitalize() + ": " + notification.data[key]['name'] for key in notification.data.keys() if 'name' in notification.data[key]]
+        return "\n".join(output_array)
+
+    @classmethod
+    def as_list_item(cls, index):
+        return str(index + 1) + ") "
