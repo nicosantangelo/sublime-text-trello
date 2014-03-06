@@ -6,4 +6,8 @@
   "id": "trellodeletecache",
   "caption": "Trello: Delete cache",
   "command": "trello_delete_cache"
+}, {
+  "id": "trellounreadnotifications",
+  "caption": "Trello: Unread Notifications",
+  "command": "trello_unread_notifications"
 }]

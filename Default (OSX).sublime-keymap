@@ -1,3 +1,4 @@
 [
-    { "keys": ["super+alt+t"], "command": "trello_navigate" }
+    { "keys": ["super+alt+t"], "command": "trello_navigate" },
+    { "keys": ["super+alt+n"], "command": "trello_unread_notifications" }
 ]
