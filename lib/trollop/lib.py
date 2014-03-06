@@ -430,6 +430,9 @@ class Member(LazyTrello):
         board = Board(self._conn, data['id'], data)
         return board
 
+    def unread_notifications(self):
+        return Notification(self._conn, "").unread(self)
+
     def reload(self):
         Member.boards = SubList('Board')
 
@@ -437,13 +440,17 @@ class Notification(LazyTrello):
 
     _prefix = '/notifications/'
 
-    data = Field()
+    data = Field('data')
     date = DateField()
-    type = Field()
+    type = Field('type')
     unread = Field()
 
     creator = ObjectField('idMemberCreator', 'Member')
 
+    def unread(self, member):
+        path = member._path + self._prefix
+        data = json.loads(self._conn.get(path, dict(read_filter="unread")))
+        return [Notification(self._conn, notification['id'], notification) for notification in data]
 
 class Organization(LazyTrello):
 
