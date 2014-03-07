@@ -1,6 +1,11 @@
 {
+    // Key and secret to identify the app
     "key"   : "",
     "secret": "",
+
+    // Access token to interact with the API
     "token" : "",
+
+    // Cache unchanged responses for better performance
     "use_cache": true
 }
