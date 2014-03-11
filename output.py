@@ -11,7 +11,7 @@ The card has:
     {comments} comments
     {votes} votes
     {attachments} attachments
-    {labels} labels
+    {labels_len} labels {labels}
         """.format(
             name = card.name,
             url = card.url,
@@ -20,8 +20,18 @@ The card has:
             comments = badges['comments'],
             votes = badges['votes'],
             attachments = badges['attachments'],
-            labels = len(card.labels)
+            labels_len = len(card.labels),
+            labels = cls.labels(card.labels)
         )
+
+    @classmethod
+    def labels(cls, labels):
+        return "( " + ", ".join([ cls.label(label) for label in labels]) + " )" if len(labels) > 0 else ""
+
+    @classmethod
+    def label(cls, label):
+        color = label['color'].capitalize()
+        return color + ": " +  label['name'] if label['name'] else color
 
     @classmethod
     def comments(cls, comments):

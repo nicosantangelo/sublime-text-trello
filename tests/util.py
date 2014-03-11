@@ -25,7 +25,7 @@ class TrelloCardMock():
         self.url  = "card_url"
         self.desc = "card_desc"
         self.members = [TrelloElementMock("user1"), TrelloElementMock("user2")]
-        self.labels  = [TrelloElementMock("label1"), TrelloElementMock("label2")]
+        self.labels  = [{'name': 'Ok', 'color': 'green'}, {'name': '', 'color': 'yellow'}, {'name': 'Urgent', 'color': 'red'}]
         self.badges = {
             'votes': 4,
             'comments': 2,

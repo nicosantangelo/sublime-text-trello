@@ -38,6 +38,7 @@ class CardOptions(Executable):
     def comments(self):
         self.command.output(Output.comments(self.card.comments()))
 
+    # TODO: Abstract this pattern
     def comment(self, text = None):
         if text is None:
             self.command.input("Comment text", self.comment)
@@ -46,13 +47,13 @@ class CardOptions(Executable):
 
     def set_label(self, color = None):
         if color is None:
-            self.command.input("Label color", self.set_label)
+            self.command.input("Label color name", self.set_label)
         else:
             self.command.defer(lambda: self.card.set_label(color))
 
     def clear_label(self, color = None):
         if color is None:
-            self.command.input("Label color", self.clear_label)
+            self.command.input("Label color name", self.clear_label)
         else:
             self.command.defer(lambda: self.card.clear_label(color))
 

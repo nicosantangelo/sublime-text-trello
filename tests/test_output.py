@@ -25,7 +25,7 @@ The card has:
     2 comments
     4 votes
     3 attachments
-    2 labels
+    3 labels ( Green: Ok, Yellow, Red: Urgent )
         """
         self.assertEqual(Output.card(card), output)
 
