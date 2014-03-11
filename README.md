@@ -109,10 +109,11 @@ You can clone the repo in your `/Packages` (*Preferences -> Browse Packages...*)
 
 ## Roadmap
 
-* Labels
 * Checklists
 * Port to ST2?
 * The rest of the [Trello API](https://trello.com/docs/index.html)?
+* Better interface?
+* ~~Labels~~
 * ~~Don't cache requests~~
 * ~~Go back option~~
 * ~~Card description~~
