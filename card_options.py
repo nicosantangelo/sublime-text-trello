@@ -14,6 +14,8 @@ class CardOptions(Executable):
             { 'name': "Show", 'action': self.show },
             { 'name': "Comments", 'action': self.comments },
             { 'name': "Comment", 'action': self.comment },
+            { 'name': "Add label", 'action': self.set_label },
+            { 'name': "Remove label", 'action': self.clear_label },
             { 'name': "Move to another List", 'action': self.move },
             { 'name': "Archive", 'action': self.close },
             { 'name': "Exit", 'action': self.noop }
@@ -41,6 +43,18 @@ class CardOptions(Executable):
             self.command.input("Comment text", self.comment)
         else:
             self.command.defer(lambda: self.card.add_comment(text))
+
+    def set_label(self, color = None):
+        if color is None:
+            self.command.input("Label color", self.set_label)
+        else:
+            self.command.defer(lambda: self.card.set_label(color))
+
+    def clear_label(self, color = None):
+        if color is None:
+            self.command.input("Label color", self.clear_label)
+        else:
+            self.command.defer(lambda: self.card.clear_label(color))
 
     def move(self, index = None):
         if index is None:
