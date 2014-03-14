@@ -276,6 +276,9 @@ class LazyTrello(object):
     def __repr__(self):
         return str(self.__unicode__())
 
+    def reload(self):
+        self.__dict__.pop("_data", None)
+
 ### BEGIN ACTUAL WRAPPER OBJECTS
 
 
@@ -355,9 +358,6 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
         body = json.dumps({'value': list._id,
                            'key': self._conn.key, 'token': self._conn.token})
         return self._conn.put(path, body=body)
-
-    def reload(self):
-        Card.badges = Field('badges')
 
 class Checklist(LazyTrello):
 

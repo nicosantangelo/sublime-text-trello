@@ -3,6 +3,7 @@ try:
     from executable import Executable
     from output import Output
 except ImportError:
+    from .trollop import Labeled
     from .trello_collection import TrelloCollection
     from .executable import Executable
     from .output import Output
@@ -38,24 +39,24 @@ class CardOptions(Executable):
     def comments(self):
         self.command.output(Output.comments(self.card.comments()))
 
-    # TODO: Abstract this pattern
-    def comment(self, text = None):
-        if text is None:
-            self.command.input("Comment text", self.comment)
-        else:
-            self.command.defer(lambda: self.card.add_comment(text))
+    def comment(self):
+        self.run_action_with_callback("Comment text", self.card.add_comment)
 
-    def set_label(self, color = None):
-        if color is None:
-            self.command.input("Label color name", self.set_label)
-        else:
-            self.command.defer(lambda: self.card.set_label(color))
+    def set_label(self):
+        self.run_action_with_callback(self.label_input_text(), self.card.set_label)
 
-    def clear_label(self, color = None):
-        if color is None:
-            self.command.input("Label color name", self.clear_label)
-        else:
-            self.command.defer(lambda: self.card.clear_label(color))
+    def clear_label(self):
+        self.run_action_with_callback(self.label_input_text(), self.card.clear_label)
+
+    def run_action_with_callback(self, input_text, callback):
+        def action(text = None):
+            if text is None:
+                self.command.input(input_text, action)
+            else:
+                self.command.defer(lambda: callback(text))
+                self.card.reload()
+
+        action()
 
     def move(self, index = None):
         if index is None:
@@ -73,3 +74,7 @@ class CardOptions(Executable):
     def noop(self):
         pass
 
+    def label_input_text(self):
+        current_colors = [label['color'] for label in self.card.labels]
+        available_choices = [label + ("*" if label in current_colors else "") for label in Labeled._valid_label_colors]
+        return "Colors (* is active): " + ", ".join(available_choices)
