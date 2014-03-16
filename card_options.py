@@ -3,7 +3,6 @@ try:
     from executable import Executable
     from output import Output
 except ImportError:
-    from .trollop import Labeled
     from .trello_collection import TrelloCollection
     from .executable import Executable
     from .output import Output
@@ -56,6 +55,7 @@ class CardOptions(Executable):
                 self.command.defer(lambda: callback(text))
                 self.card.reload()
 
+
         action()
 
     def move(self, index = None):
@@ -75,6 +75,8 @@ class CardOptions(Executable):
         pass
 
     def label_input_text(self):
+        valid_label_colors = ['green', 'yellow', 'orange', 'red', 'purple', 'blue']
         current_colors = [label['color'] for label in self.card.labels]
-        available_choices = [label + ("*" if label in current_colors else "") for label in Labeled._valid_label_colors]
+        available_choices = [label + ("*" if label in current_colors else "") for label in valid_label_colors]
+        
         return "Colors (* is active): " + ", ".join(available_choices)
