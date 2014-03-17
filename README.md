@@ -10,6 +10,9 @@ This package allows you to navigate the data Trello provides using the Trello AP
 
 If you [run][1] the `Trello: Navigate` command, you'll see your boards, and from there you can go into the Trello element structure `(Board -> List -> Card -> Actions)`.
 
+In the default options you can find `{ "keep_navigate_open_after_action": true }`
+If you want you can set it to false on your [settings][3] so the panel will close after each action.
+
 ### Unread notifications
 
 When you [run][1] `Trello: Unread Notifications`, you'll see the amount of unread notifications the current user has, and a *little* description of what happened, for example:
