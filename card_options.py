@@ -55,7 +55,6 @@ class CardOptions(Executable):
                 self.command.defer(lambda: callback(text))
                 self.card.reload()
 
-
         action()
 
     def move(self, index = None):

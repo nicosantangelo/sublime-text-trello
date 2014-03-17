@@ -38,6 +38,8 @@ class TrelloNotificationMock():
         self.data = data
 
 class CommandMock():
+    renavigate = False
+    
     def display():
         pass
 

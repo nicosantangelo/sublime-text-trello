@@ -50,6 +50,13 @@ class BaseOperationTests(unittest.TestCase):
         self.base_operation.add.assert_called_with(text)
         self.trello_element.reload.assert_called_with()
 
+    def test_base_add_calls_add_and_execute_if_renavigate_is_true(self):
+        text = "Text"
+        self.base_operation.command.renavigate = True
+        self.base_operation.execute = MagicMock()
+        self.base_operation.base_add(text)
+        self.base_operation.execute.assert_called_with()
+
 class BoardOperationTests(unittest.TestCase):
     def setUp(self):
         self.operation, self.trello_element = OperationMock.create(BoardOperation)

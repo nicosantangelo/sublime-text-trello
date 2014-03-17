@@ -44,6 +44,8 @@ class BaseOperation(Executable):
     def base_add(self, text):
         self.add(text)
         self.trello_element.reload()
+        if self.command.renavigate:
+            self.execute()
 
     def add(self, text):
         pass

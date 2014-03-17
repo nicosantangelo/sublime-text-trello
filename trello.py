@@ -32,6 +32,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.secret = default_settings.get("secret") or user_settings.get("secret")
         self.token  = user_settings.get("token")
         self.use_cache = user_settings.get("use_cache", True)
+        self.renavigate = user_settings.get("keep_navigate_open_after_action", True)
 
     def help_text(self):
         first  = "Sorry for the interruption, in order to use the package please go to:\n%s\nand paste the token in the settings (Preferences -> Package Settings -> Trello -> Settings User)." % self.token_url()

@@ -7,5 +7,8 @@
     "token" : "",
 
     // Cache unchanged responses for better performance
-    "use_cache": true
+    "use_cache": true,
+
+    // After creating elements or performing an action on them the panel reopens (until exit is selected)
+    "keep_navigate_open_after_action": true
 }
