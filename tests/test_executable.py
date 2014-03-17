@@ -23,6 +23,14 @@ class ExecutableTests(unittest.TestCase):
         self.executable.execute()
         self.command_mock.display.assert_called_with(self.executable.items(), self.executable.callback)
 
+    def test_reexecute_calls_execute_only_if_renavigate_is_set_on_the_comand(self):
+        self.executable.execute = MagicMock()
+        self.executable.command = self.command_mock
+        self.executable.reexecute()
+        self.executable.command.renavigate = False
+        self.executable.reexecute()
+        self.assertEqual(self.executable.execute.call_count, 1)
+
 
 if __name__ == '__main__':
     unittest.main()

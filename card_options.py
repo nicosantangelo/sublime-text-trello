@@ -32,11 +32,14 @@ class CardOptions(Executable):
             self.command.defer(option['action'])
 
     # Actions
+    # TODO: Refactor reexecute calls
     def show(self):
         self.command.output(Output.card(self.card))
+        self.reexecute()
 
     def comments(self):
         self.command.output(Output.comments(self.card.comments()))
+        self.reexecute()
 
     def comment(self):
         self.run_action_with_callback("Comment text", self.card.add_comment)
@@ -54,6 +57,7 @@ class CardOptions(Executable):
             else:
                 self.command.defer(lambda: callback(text))
                 self.card.reload()
+                self.reexecute()
 
         action()
 
@@ -65,10 +69,12 @@ class CardOptions(Executable):
             selected_list = self.list_collection.find(index)
             self.command.defer(lambda: self.card.move_to_list(selected_list))
             selected_list.reload()
+            self.reexecute()
 
     def close(self):
         self.card.close()
         self.card.list.reload()
+        self.reexecute()
 
     def noop(self):
         pass

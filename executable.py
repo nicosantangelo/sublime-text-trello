@@ -4,6 +4,10 @@ class Executable():
         self.command.display(self.items(), self.callback)
         return self
 
+    def reexecute(self):
+        if self.command.renavigate:
+            self.execute()
+
     def items(self):
         return [""]
 
