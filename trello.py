@@ -35,7 +35,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.renavigate = user_settings.get("keep_navigate_open_after_action", True)
 
     def help_text(self):
-        first  = "Sorry for the interruption, in order to use the package please go to:\n%s\nand paste the token in the settings (Preferences -> Package Settings -> Trello -> Settings User)." % self.token_url()
+        first  = "Sorry for the interruption, in order to use the package please go to:\n%s\nand paste the token in the settings (Preferences -> Package Settings -> Trello -> Settings - User). You can check Settings - Default to see the settings structure." % self.token_url()
         middle = "If you don't want to use the default app, you can change the key and the secret too, just go to:\n%s\nand copy paste both to the settings :)" % self.key_secret_generator_url()
         last   = "For more info, you can go to: https://github.com/NicoSantangelo/sublime-text-trello"
         return "%s\n\n%s\n\n%s" % (first, middle, last)
