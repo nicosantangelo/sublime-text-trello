@@ -76,9 +76,9 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.async(fn, 0)
         
     def async(self, fn, delay):
-        self.progress = ProgressNotifier('Trello: Working')
-        sublime.set_timeout_async(lambda: self.call(fn), delay)
+        progress = ProgressNotifier('Trello: Working')
+        sublime.set_timeout_async(lambda: self.call(fn, progress), delay)
 
-    def call(self, fn):
+    def call(self, fn, progress):
         fn()
-        self.progress.stop()
+        progress.stop()
