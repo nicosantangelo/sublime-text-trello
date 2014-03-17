@@ -11,13 +11,13 @@ class CardOptions(Executable):
     def __init__(self, card, previous_operation = None):
         self.options = [
             { 'name': "..", 'action': self.go_back },
-            { 'name': "Show", 'action': self.show },
-            { 'name': "Comments", 'action': self.comments },
+            { 'name': "Show", 'action': self.show, 'single_step': True },
+            { 'name': "Comments", 'action': self.comments, 'single_step': True },
             { 'name': "Comment", 'action': self.comment },
             { 'name': "Add label", 'action': self.set_label },
             { 'name': "Remove label", 'action': self.clear_label },
             { 'name': "Move to another List", 'action': self.move },
-            { 'name': "Archive", 'action': self.close },
+            { 'name': "Archive", 'action': self.close, 'single_step': True },
             { 'name': "Exit", 'action': self.noop }
         ]
         self.card = card
@@ -30,16 +30,15 @@ class CardOptions(Executable):
         option = self.options[index]
         if not option is None:
             self.command.defer(option['action'])
+            if 'single_step' in option:
+                self.reexecute()
 
     # Actions
-    # TODO: Refactor reexecute calls
     def show(self):
         self.command.output(Output.card(self.card))
-        self.reexecute()
 
     def comments(self):
         self.command.output(Output.comments(self.card.comments()))
-        self.reexecute()
 
     def comment(self):
         self.run_action_with_callback("Comment text", self.card.add_comment)
@@ -74,7 +73,6 @@ class CardOptions(Executable):
     def close(self):
         self.card.close()
         self.card.list.reload()
-        self.reexecute()
 
     def noop(self):
         pass
