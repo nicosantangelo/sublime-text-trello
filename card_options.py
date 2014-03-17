@@ -1,3 +1,5 @@
+import webbrowser
+
 try:
     from trello_collection import TrelloCollection
     from executable import Executable
@@ -11,6 +13,7 @@ class CardOptions(Executable):
     def __init__(self, card, previous_operation = None):
         self.options = [
             { 'name': "..", 'action': self.go_back },
+            { 'name': "Open in Browser", 'action': self.open_in_browser },
             { 'name': "Show", 'action': self.show, 'single_step': True },
             { 'name': "Comments", 'action': self.comments, 'single_step': True },
             { 'name': "Comment", 'action': self.comment },
@@ -34,6 +37,9 @@ class CardOptions(Executable):
                 self.reexecute()
 
     # Actions
+    def open_in_browser(self):
+        webbrowser.open_new(self.card.url)
+
     def show(self):
         self.command.output(Output.card(self.card))
 

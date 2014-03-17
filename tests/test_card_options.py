@@ -11,7 +11,7 @@ class CardOptionsTests(unittest.TestCase):
         self.card_options.command = CommandMock()
 
     def test_items_returns_the_card_operations(self):
-        options = ["..", "Show", "Comments", "Comment", "Add label", "Remove label", "Move to another List", "Archive", "Exit"]
+        options = ["..", "Open in Browser", "Show", "Comments", "Comment", "Add label", "Remove label", "Move to another List", "Archive", "Exit"]
         self.assertEqual(options, self.card_options.items())
 
     def test_callback_calls_the_method_at_the_given_index(self):
