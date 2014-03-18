@@ -34,6 +34,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.token  = user_settings.get("token")
         self.use_cache = user_settings.get("use_cache", True)
         self.renavigate = user_settings.get("keep_navigate_open_after_action", True)
+        self.syntax_file = user_settings.get("syntax_file")
 
     def help_text(self):
         first  = "Sorry for the interruption, in order to use the package please go to:\n%s\nand paste the token in the settings (Preferences -> Package Settings -> Trello -> Settings - User). You can check Settings - Default to see the settings structure." % self.token_url()
@@ -86,7 +87,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.output_view.set_read_only(True)
 
     def set_new_view_attributes(self, view):
-        view.set_syntax_file("Packages/Markdown/Markdown.tmLanguage")
+        view.set_syntax_file(self.syntax_file)
         view.set_viewport_position((0, 0), True)
 
     # Helpers

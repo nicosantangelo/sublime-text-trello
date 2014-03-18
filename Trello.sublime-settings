@@ -10,5 +10,8 @@
     "use_cache": true,
 
     // After creating elements or performing an action on them the panel reopens (until exit is selected)
-    "keep_navigate_open_after_action": true
+    "keep_navigate_open_after_action": true,
+
+    // Syntax to use when showing the text from a trello element
+    "syntax_file": "Packages/Markdown/Markdown.tmLanguage" 
 }
