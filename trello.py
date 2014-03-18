@@ -34,6 +34,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.token  = user_settings.get("token")
         self.use_cache = user_settings.get("use_cache", True)
         self.renavigate = user_settings.get("keep_navigate_open_after_action", True)
+        self.results_in_new_tab = user_settings.get("results_in_new_tab", True)
         self.syntax_file = user_settings.get("syntax_file")
 
     def help_text(self):

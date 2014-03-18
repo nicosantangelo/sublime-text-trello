@@ -12,6 +12,9 @@
     // After creating elements or performing an action on them the panel reopens (until exit is selected)
     "keep_navigate_open_after_action": true,
 
+    // Use a new tab when showing the results. If it's false it'll use a panel (like the ST console)
+    "results_in_new_tab": true,
+
     // Syntax to use when showing the text from a trello element
     "syntax_file": "Packages/Markdown/Markdown.tmLanguage" 
 }

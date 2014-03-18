@@ -2,8 +2,7 @@ class Output():
     @classmethod
     def card(cls, card):
         badges = card.badges
-        return """
-{name} ({url})
+        return """{name} ({url})
     {desc}
 
 The card has:
@@ -11,8 +10,7 @@ The card has:
     {comments} comments
     {votes} votes
     {attachments} attachments
-    {labels_len} labels {labels}
-        """.format(
+    {labels_len} labels {labels}""".format(
             name = card.name,
             url = card.url,
             desc = card.desc,

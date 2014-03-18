@@ -16,8 +16,7 @@ class OutputTests(unittest.TestCase):
 
     def test_card_returns_the_information_of_the_card(self):
         card = TrelloCardMock()
-        output = """
-card_name (card_url)
+        output = """card_name (card_url)
     card_desc
 
 The card has:
@@ -25,8 +24,7 @@ The card has:
     2 comments
     4 votes
     3 attachments
-    3 labels ( Green: Ok, Yellow, Red: Urgent )
-        """
+    3 labels ( Green: Ok, Yellow, Red: Urgent )"""
         self.assertEqual(Output.card(card), output)
 
     def test_notifications_shows_the_available_information_and_the_amount(self):
