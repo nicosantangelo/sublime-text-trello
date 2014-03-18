@@ -17,6 +17,14 @@ class CustomActions():
     def len(self):
         return len(self.prefixes)
 
+    def add(self, prefix, method):
+        self.prefixes.append(prefix)
+        self.prefix_methods.append(method)
+
+    def rename(self, old_name, new_name):
+        index = self.prefixes.index(old_name)
+        self.prefixes[index] = new_name
+
     def remove(self, name):
         index = self.prefixes.index(name)
         self.prefixes.pop(index)

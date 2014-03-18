@@ -15,5 +15,11 @@ class TrelloNavigateCommand(TrelloCommand):
     def output(self, text):
         self.show_output_panel(text)
 
+    def output_in_tab(self, text):
+        self.show_in_tab(text)
+
+    def output_editable(self, text, extra = None):
+        self.show_in_editable_tab(text, extra)
+
     def input(self, label, callback = None):
         self.show_input_panel(label, "", callback)

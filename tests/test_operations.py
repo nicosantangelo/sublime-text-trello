@@ -114,11 +114,18 @@ class CardOperationTests(unittest.TestCase):
     def test_next_operation_class(self):
         self.assertEqual(self.operation.next_operation_class(), CardOptions)
 
-    def test_add_creates_a_card_with_the_text(self):
-        text = "Some Text"
+    def test_add_creates_a_card_with_the_text_and_description(self):
+        name = "Some Text"
+        desc = "Some Desc"
         self.trello_element.add_card = MagicMock()
-        self.operation.add(text)
-        self.trello_element.add_card.assert_called_with(text)
+        self.operation.add(name, desc)
+        self.trello_element.add_card.assert_called_with(name, desc)
+
+    def test_split_card_contents_returns_the_name_and_description_splitted_by_new_lines(self):
+        content = "Name!!\n\nDescription\nYeah!"
+        name, desc = self.operation.split_card_contents(content)
+        self.assertEqual(name, "Name!!")
+        self.assertEqual(desc, "Description\nYeah!")
 
 
 if __name__ == '__main__':
