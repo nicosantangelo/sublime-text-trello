@@ -6,12 +6,15 @@ This is a package for [Sublime Text 3](http://www.sublimetext.com/3) that provid
 
 This package allows you to navigate the data Trello provides using the Trello API. It's heavily inspired in the [File Navigator](https://github.com/Chris---/SublimeText-File-Navigator) package.
 
+For more info on how to customize the plugin check the [settings][4].
+
+
 ### Navigate
 
 If you [run][1] the `Trello: Navigate` command, you'll see your boards, and from there you can go into the Trello element structure `(Board -> List -> Card -> Actions)`.
 
-In the default options you can find `{ "keep_navigate_open_after_action": true }`
-If you want you can set it to false on your [settings][3] so the panel will close after each action.
+In the [default settings][4] you can find `{ "keep_navigate_open_after_action": true }`
+If you want you can set it to false on your [user settings][3] so the panel will close after each action.
 
 ### Unread notifications
 
@@ -33,7 +36,7 @@ By default most requests will be cached, to improve performance. When you do an 
 
 But if you make changes in the web version or by some chance elements remain cached, changes will not be reflected.
 
-To avoid this you have two options, [run][1] the `Trello: Delete cache` command, which will clean the cache and will request everything again *or* you can switch the `use_cache` (which is true by default) option to `false` on your [settings][3], like this:
+To avoid this you have two options, [run][1] the `Trello: Delete cache` command, which will clean the cache and will request everything again *or* you can switch the `use_cache` (which is true by default) option to `false` on your [user settings][3], like this:
 
 ````json
 { "use_cache": false }
@@ -44,7 +47,7 @@ which is not really recommended because the package will request everything on *
 ## Generating Your Keys
 By default the package uses a Trello app generated only to be used here. If the `token` isn't present the package will pop up a message telling you how to get it.
 
-Basically because of the way Trello authentication works, you'll need to copy a url in your browser and pase the result in the `token` property of the [settings][3], for example:
+Basically because of the way Trello authentication works, you'll need to copy a url in your browser and pase the result in the `token` property of the [user settings][3], for example:
 
 Url:
 
@@ -62,9 +65,34 @@ Options:
 }
 ````
 
-If you don't want to use the default app, you can change it by adding your own key and secret to the json [settings][3]. You can get them from [here](https://trello.com/1/appKey/generate).
+If you don't want to use the default app, you can change it by adding your own key and secret to the [user settings][3] (check the [default settings][4] to see how). You can get them from [here](https://trello.com/1/appKey/generate).
 
-Also, if you want to enable only some access to your account, you can modify the scope of the url, for example from `&scope=read,write` to `&scope=read` 
+Also, if you want to enable only some access to your account, you can modify the scope of the url before pasting it in the browser, for example from `&scope=read,write` to `&scope=read` 
+
+## All settings
+
+````json
+{
+    // Key and secret to identify the app. If not present the default is used
+    "key"   : "",
+    "secret": "",
+
+    // Access token to interact with the API (required)
+    "token" : "",
+
+    // Cache unchanged responses for better performance
+    "use_cache": true,
+
+    // After creating elements or performing an action on them the panel reopens (until exit is selected)
+    "keep_navigate_open_after_action": true,
+
+    // Use a new tab when showing the results. If it's false it'll use a panel (like the ST console)
+    "results_in_new_tab": true,
+
+    // Syntax to use when showing the text from a trello element
+    "syntax_file": "Packages/Markdown/Markdown.tmLanguage" 
+}
+````
 
 ## Shortcut Keys
 
@@ -86,7 +114,7 @@ Also, if you want to enable only some access to your account, you can modify the
 ````
 
 ## Settings location
-Preferences -> Package Settings -> Trello -> Settings User
+Preferences -> Package Settings -> Trello -> Settings - User
 
 ## Instalation
 
@@ -144,3 +172,4 @@ See LICENSE for details.
   [1]: https://github.com/NicoSantangelo/sublime-text-trello#shortcut-keys
   [2]: https://github.com/NicoSantangelo/sublime-text-trello#roadmap
   [3]: https://github.com/NicoSantangelo/sublime-text-trello#settings-location
+  [4]: https://github.com/NicoSantangelo/sublime-text-trello#all-settings

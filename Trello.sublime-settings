@@ -1,9 +1,9 @@
 {
-    // Key and secret to identify the app
+    // Key and secret to identify the app. If not present the default is used
     "key"   : "",
     "secret": "",
 
-    // Access token to interact with the API
+    // Access token to interact with the API (required)
     "token" : "",
 
     // Cache unchanged responses for better performance
