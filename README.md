@@ -71,7 +71,7 @@ Also, if you want to enable only some access to your account, you can modify the
 
 ## All settings
 
-````json
+````javascript
 {
     // Key and secret to identify the app. If not present the default is used
     "key"   : "",
