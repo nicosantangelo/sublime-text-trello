@@ -13,6 +13,7 @@ class TrelloNotificationsCommand(TrelloCommand):
             { 'name': "Exit", 'action': self.noop }
         ]
         self.show_quick_panel(self.items(), self.callback)
+        self.connection = connection
 
     def items(self):
         return [option['name'] for option in self.options]
@@ -25,10 +26,10 @@ class TrelloNotificationsCommand(TrelloCommand):
     def show_unread(self):
         self.view.run_command("trello_unread_notifications")
 
-    def read_all():
+    def read_all(self):
         pass
 
-    def noop():
+    def noop(self):
         pass
 
 class TrelloUnreadNotificationsCommand(TrelloCommand):
