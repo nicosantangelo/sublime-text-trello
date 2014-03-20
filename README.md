@@ -16,7 +16,11 @@ If you [run][1] the `Trello: Navigate` command, you'll see your boards, and from
 In the [default settings][4] you can find `{ "keep_navigate_open_after_action": true }`
 If you want you can set it to false on your [user settings][3] so the panel will close after each action.
 
-### Unread notifications
+### Notifications
+
+Running `Trello: Notifications` you'll get two options, `Unread` and `Read all`.
+
+#### Unread notifications
 
 When you [run][1] `Trello: Unread Notifications`, you'll see the amount of unread notifications the current user has, and a *little* description of what happened, for example:
 
@@ -29,6 +33,10 @@ Board: Some Board
 ````
 
 This could be improved a lot, but I think it's understandable (with a little bit of brain parsing) and I prefer adding some other stuff before making it prettier (pull requests are welcome!).
+
+#### Read all notifications
+
+This command will attempt to read all your current unread notifications. This may result in an error because more privileges are needed. The package will explain how to fix this (if you so desire) in a panel.
 
 ### Cache
 
@@ -107,10 +115,13 @@ Also, if you want to enable only some access to your account, you can modify the
  * Unread notifications: `super+alt+n`
 
 
-`Delete cache` does not have a shortcut, but you can set it in `Preferences -> Key Bindings - User` by adding:
+`Delete cache` and `Notifications` don't have a shortcut, but you can set it in `Preferences -> Key Bindings - User` by adding:
 
 ````json
-{ "keys": ["ctrl+alt+d"], "command": "trello_delete_cache" }
+{
+    "keys": ["alt+d"], "command": "trello_delete_cache", 
+    "keys": ["alt+n"], "command": "trello_notifications"
+}
 ````
 
 ## Settings location

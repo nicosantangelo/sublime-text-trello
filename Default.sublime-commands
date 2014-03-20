@@ -10,4 +10,8 @@
   "id": "trellounreadnotifications",
   "caption": "Trello: Unread Notifications",
   "command": "trello_unread_notifications"
+}, {
+  "id": "trellonotifications",
+  "caption": "Trello: Notifications",
+  "command": "trello_notifications"
 }]
