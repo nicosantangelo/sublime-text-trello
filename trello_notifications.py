@@ -14,8 +14,8 @@ class TrelloNotificationsCommand(TrelloCommand):
             { 'name': "Read all", 'action': self.defer_read_all },
             { 'name': "Exit", 'action': self.noop }
         ]
-        self.show_quick_panel(self.items(), self.callback)
         self.connection = connection
+        self.show_quick_panel(self.items(), self.callback)
 
     def items(self):
         return [option['name'] for option in self.options]
