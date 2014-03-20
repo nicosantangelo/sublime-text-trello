@@ -295,7 +295,7 @@ class Board(LazyTrello, Closable):
 
     _prefix = '/boards/'
 
-    url = Field()
+    url = Field('url')
     name = Field('name')
     pinned = Field()
     prefs = Field()
@@ -388,7 +388,7 @@ class List(LazyTrello, Closable):
 
     closed = Field('closed')
     name = Field('name')
-    url = Field()
+    url = Field('url')
     board = ObjectField('idBoard', 'Board')
     cards = SubList('Card')
 
@@ -410,7 +410,7 @@ class Member(LazyTrello):
 
     _prefix = '/members/'
 
-    url = Field()
+    url = 'http://www.trello.com'
     fullname = Field('fullName')
     username = Field('username')
 

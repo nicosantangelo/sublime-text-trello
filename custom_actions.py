@@ -2,8 +2,8 @@ class CustomActions():
     sufix = ["Exit"]
     
     def __init__(self, operation):
-        self.prefixes = ["..", "Create " + operation.trello_element_name()]
-        self.prefix_methods = [operation.go_back, operation.get_name]
+        self.prefixes = ["..", "Open in Browser", "Create " + operation.trello_element_name()]
+        self.prefix_methods = [operation.go_back, operation.open_in_browser, operation.get_name]
 
     def encapsulate(self, data):
         return self.prefixes + data + self.sufix

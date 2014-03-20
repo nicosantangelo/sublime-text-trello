@@ -14,6 +14,10 @@ class BaseOperation(Executable):
         self.custom_actions = CustomActions(self)
         self.trello_element = trello_element
         self.previous_operation = previous_operation
+        self.after_init()
+
+    def after_init(self):
+        pass
 
     def items(self):
         self.set_collection()
@@ -60,9 +64,11 @@ class BaseOperation(Executable):
     def next_operation_class(self):
         pass
 
+    def open_in_browser(self):
+        self.command.defer(super().open_in_browser)
+
 class BoardOperation(BaseOperation):
-    def __init__(self, trello_element, previous_operation = None):
-        super().__init__(trello_element, previous_operation)
+    def after_init(self):
         self.custom_actions.remove("..")
 
     def trello_element_property(self):
@@ -85,8 +91,8 @@ class ListOperation(BaseOperation):
         self.trello_element.add_list(text)
 
 class CardOperation(BaseOperation):
-    def __init__(self, trello_element, previous_operation = None):
-        super().__init__(trello_element, previous_operation)
+    def after_init(self):
+        self.custom_actions.remove("Open in Browser")
         self.custom_actions.rename("Create Card", "Quick create card")
         self.custom_actions.add("Create card with description", self.create_with_description)
 

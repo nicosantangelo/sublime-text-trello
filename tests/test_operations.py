@@ -18,14 +18,14 @@ class BaseOperationTests(unittest.TestCase):
 
     def test_items_returns_every_name_from_the_collection_with_the_added_options(self):
         self.base_operation.set_collection = MagicMock()
-        self.assertEqual(self.base_operation.items(), ["..", "Create Base", "first", "second", "Exit"])
+        self.assertEqual(self.base_operation.items(), ["..", "Open in Browser", "Create Base", "first", "second", "Exit"])
 
     def test_callback_uses_find_to_instantiate_the_operation_if_the_index_is_in_the_collection(self):
-        self.base_operation.callback(2)
+        self.base_operation.callback(3)
         self.class_mock.assert_called_with(self.collection[0], self.base_operation)
 
     def test_callback_calls_execute_on_the_operation(self):
-        self.base_operation.callback(2)
+        self.base_operation.callback(3)
         self.instance_mock.execute.assert_called_with(self.base_operation.command)
 
     def test_callback_doesnt_call_find_if_the_index_is_bigger_than_the_collection_length(self):
@@ -39,7 +39,7 @@ class BaseOperationTests(unittest.TestCase):
 
     def test_callback_calls_the_input_method_on_the_command_with_deferred_add_as_callback_if_index_is_1(self):
         self.base_operation.command.input = MagicMock()
-        self.base_operation.callback(1)
+        self.base_operation.callback(2)
         self.base_operation.command.input.assert_called_with("Name", self.base_operation.deferred_add)
 
     def test_base_add_calls_add_with_the_text_and_cleans_the_cache_for_the_element(self):
@@ -64,7 +64,7 @@ class BoardOperationTests(unittest.TestCase):
 
     def test_items_returns_every_name_from_the_collection_without_goback(self):
         self.operation.set_collection = MagicMock()
-        self.assertEqual(self.operation.items(), ["Create Board", "first", "second", "Exit"])
+        self.assertEqual(self.operation.items(), ["Open in Browser", "Create Board", "first", "second", "Exit"])
 
     def test_trello_element_property(self):
         self.assertEqual(self.operation.trello_element_property(), "boards")
@@ -72,11 +72,11 @@ class BoardOperationTests(unittest.TestCase):
     def test_callback_calls_execute_command_with_the_index(self):
         self.operation.execute_command = MagicMock()
         self.operation.callback(5)
-        self.operation.execute_command.assert_called_with(4)
+        self.operation.execute_command.assert_called_with(3)
 
-    def test_callback_calls_the_input_method_on_the_command_with_deferred_add_as_callback_if_index_is_0(self):
+    def test_callback_calls_the_input_method_on_the_command_with_deferred_add_as_callback_if_index_is_1(self):
         self.operation.command.input = MagicMock()
-        self.operation.callback(0)
+        self.operation.callback(1)
         self.operation.command.input.assert_called_with("Name", self.operation.deferred_add)
 
     def test_next_operation_class(self):
@@ -107,6 +107,11 @@ class ListOperationTests(unittest.TestCase):
 class CardOperationTests(unittest.TestCase):
     def setUp(self):
         self.operation, self.trello_element = OperationMock.create(CardOperation)
+
+    def test_items_returns_every_name_from_the_collection_with_custom_actions(self):
+        self.operation.set_collection = MagicMock()
+        self.operation.collection = TrelloCollection(TrelloElementMock.collection())
+        self.assertEqual(self.operation.items(), ['..', 'Quick create card', 'Create card with description', 'first', 'second', 'Exit'])
 
     def test_trello_element_property(self):
         self.assertEqual(self.operation.trello_element_property(), "cards")

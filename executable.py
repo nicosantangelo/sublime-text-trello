@@ -1,3 +1,5 @@
+import webbrowser
+
 class Executable():
     def execute(self, command = None):
         self.command = command or self.command
@@ -16,3 +18,6 @@ class Executable():
 
     def go_back(self):
         self.previous_operation.execute()
+
+    def open_in_browser(self):
+        webbrowser.open_new(self.trello_element.url)
