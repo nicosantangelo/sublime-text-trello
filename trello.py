@@ -29,8 +29,8 @@ class TrelloCommand(sublime_plugin.TextCommand):
         default_settings = sublime.load_settings("Default_app.sublime-settings")
         user_settings    = sublime.load_settings("Trello.sublime-settings")
 
-        self.key    = default_settings.get("key")    or user_settings.get("key")
-        self.secret = default_settings.get("secret") or user_settings.get("secret")
+        self.key    = user_settings.get("key") or default_settings.get("key")
+        self.secret = user_settings.get("secret") or default_settings.get("secret")
         self.token  = user_settings.get("token")
         self.use_cache = user_settings.get("use_cache", True)
         self.renavigate = user_settings.get("keep_navigate_open_after_action", True)
