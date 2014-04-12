@@ -16,5 +16,8 @@
     "results_in_new_tab": true,
 
     // Syntax to use when showing the text from a trello element
-    "syntax_file": "Packages/Markdown/Markdown.tmLanguage" 
+    "syntax_file": "Packages/Markdown/Markdown.tmLanguage",
+
+    // Set the delemiter used to create more than one card at once in 'Create card with description'
+    "card_delimiter": "<end>"
 }

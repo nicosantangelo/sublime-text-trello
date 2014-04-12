@@ -103,16 +103,23 @@ class CardOperation(BaseOperation):
         return CardOptions
 
     def create_with_description(self):
-        message = "Replace this with the card name\n\nReplace this with the card description (the card will be saved when this tab is closed, leave empty to cancel)"
+        first  = "Replace this with the card name. The card will be saved when this tab is closed, leave this tab empty to cancel"
+        middle = "Replace this with the card description, it can be multiline."
+        last   = "You can create as many cards as you want, just split them by the card_delimiter (from the settings) and a newline." 
+        message = "%s\n\n%s\n%s" % (first, middle, last)
         self.command.output_editable(message, self)
 
     def full_add(self, content):
-        name, description = self.split_card_contents(content)
-        self.add(name, description)
+        for card in self.split_cards(content):
+            name, description = self.split_card_contents(card)
+            self.add(name, description)
         self.restart()
 
     def add(self, text, description = None):
         self.trello_element.add_card(text, description)
+
+    def split_cards(self, content):
+        return content.split(self.command.card_delimiter + "\n") if self.command.card_delimiter else [content]
 
     def split_card_contents(self, content):
         splitted = content.split("\n\n", 1)
