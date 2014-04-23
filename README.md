@@ -127,7 +127,7 @@ Also, if you want to enable only some access to your account, you can modify the
 ## Settings location
 Preferences -> Package Settings -> Trello -> Settings - User
 
-## Instalation
+## Installation
 
 ### PackageControl
 If you have [PackageControl](http://wbond.net/sublime_packages/package_control) installed, you can use that to install the package.
