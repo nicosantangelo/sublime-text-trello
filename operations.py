@@ -1,11 +1,13 @@
 try:
     from executable import Executable
     from trello_collection import TrelloCollection
+    from trello_cache import TrelloCache
     from card_options import CardOptions
     from custom_actions import CustomActions
 except ImportError:
     from .executable import Executable
     from .trello_collection import TrelloCollection
+    from .trello_cache import TrelloCache
     from .card_options import CardOptions
     from .custom_actions import CustomActions
 
@@ -38,8 +40,8 @@ class BaseOperation(Executable):
         else:
             self.command.defer(lambda: self.execute_command(index - self.custom_actions.len()))
 
-    def get_name(self):
-        self.command.input("Name", self.deferred_add)
+    def get_name(self, label="Name"):
+        self.command.input(label, self.deferred_add)
 
     def deferred_add(self, text = None):
         if text:
@@ -95,6 +97,7 @@ class CardOperation(BaseOperation):
         self.custom_actions.remove("Open in Browser")
         self.custom_actions.rename("Create Card", "Quick create card")
         self.custom_actions.add("Create card with description", self.create_with_description)
+        TrelloCache.set(self.trello_element)
 
     def trello_element_property(self):
         return "cards"
@@ -102,11 +105,11 @@ class CardOperation(BaseOperation):
     def next_operation_class(self):
         return CardOptions
 
-    def create_with_description(self):
+    def create_with_description(self, label=""):
         first  = "Replace this with the card name. The card will be saved when this tab is closed, leave this tab empty to cancel"
         middle = "Replace this with the card description, it can be multiline."
         last   = "You can create as many cards as you want, just split them by the card_delimiter (from the settings) and a newline." 
-        message = "%s\n\n%s\n%s" % (first, middle, last)
+        message = "%s %s\n\n%s\n%s" % (label, first, middle, last)
         self.command.output_editable(message, self)
 
     def full_add(self, content):

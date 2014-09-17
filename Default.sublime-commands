@@ -14,4 +14,12 @@
   "id": "trellonotifications",
   "caption": "Trello: Notifications",
   "command": "trello_notifications"
+}, {
+  "id": "trelloquickcreatecard",
+  "caption": "Trello: Quick create card",
+  "command": "trello_quick_create_card"
+}, {
+  "id": "trellocreatecardwithdescription",
+  "caption": "Trello: Create card with description",
+  "command": "trello_create_card_with_description"
 }]
