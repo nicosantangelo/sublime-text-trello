@@ -16,6 +16,14 @@ If you [run][1] the `Trello: Navigate` command, you'll see your boards, and from
 In the [default settings][4] you can find `{ "keep_navigate_open_after_action": true }`
 If you want you can set it to false on your [user settings][3] so the panel will close after each action.
 
+### Card creation
+
+#### 'Quick create card' and 'Create card with description'
+
+It tries to create a Card on the last **active** List. The **active** list refers to the last List viewed using the `Trello: Navigate` command.
+
+If you didn't use `Navigate` yet the package will display a panel explaining the situation.
+
 ### Notifications
 
 Running `Trello: Notifications` you'll get two options, `Unread` and `Read all`.
@@ -37,6 +45,7 @@ This could be improved a lot, but I think it's understandable (with a little bit
 #### Read all notifications
 
 This command will attempt to read all your current unread notifications. This may result in an error because more privileges are needed. The package will explain how to fix this (if you so desire) in a panel.
+
 
 ### Cache
 
@@ -98,7 +107,11 @@ Also, if you want to enable only some access to your account, you can modify the
     "results_in_new_tab": true,
 
     // Syntax to use when showing the text from a trello element
-    "syntax_file": "Packages/Markdown/Markdown.tmLanguage" 
+    "syntax_file": "Packages/Markdown/Markdown.tmLanguage",
+
+    // Set the delemiter used to create more than one card at once in 'Create card with description'.
+    // By default, if you place "<end>" after the card description placeholder you can create another card (as many as you want)
+    "card_delimiter": "<end>"
 }
 ````
 
@@ -154,7 +167,6 @@ You can clone the repo in your `/Packages` (*Preferences -> Browse Packages...*)
 * Checklists
 * Port to ST2?
 * The rest of the [Trello API](https://trello.com/docs/index.html)?
-* Better interface?
 * ~~Labels~~
 * ~~Don't cache requests~~
 * ~~Go back option~~
