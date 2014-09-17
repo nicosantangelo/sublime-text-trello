@@ -97,7 +97,7 @@ class CardOperation(BaseOperation):
         self.custom_actions.remove("Open in Browser")
         self.custom_actions.rename("Create Card", "Quick create card")
         self.custom_actions.add("Create card with description", self.create_with_description)
-        TrelloCache.set(self.trello_element)
+        TrelloCache.set(self)
 
     def trello_element_property(self):
         return "cards"

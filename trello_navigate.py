@@ -7,7 +7,7 @@ except ImportError:
     from .trello_cache import TrelloCache
     from .operations import BoardOperation, CardOperation
 
-class Navegable():
+class Navegable(TrelloCommand):
     def display(self, names, callback = None):
         self.show_quick_panel(names, callback)
 
@@ -23,26 +23,27 @@ class Navegable():
     def output_editable(self, text, extra = None):
         self.show_in_editable_tab(text, extra)
 
-class TrelloNavigateCommand(TrelloCommand, Navegable):
+    def on_cached_operation(self, fn):
+        if TrelloCache.is_empty():
+            help_text = self.compose_help_text("No active Trello List found.", "This command works on the last visited list using 'Trello: Navigate'.")
+            self.show_output_panel(help_text)
+        else:
+            operation = TrelloCache.get() 
+            trello_element = operation.trello_element
+            fn(operation, trello_element)
+
+class TrelloNavigateCommand(Navegable):
     def work(self, connection):
         BoardOperation(connection.me).execute(self)
 
-class TrelloQuickCreateCardCommand(TrelloCommand, Navegable):
+class TrelloQuickCreateCardCommand(Navegable):
     def work(self, connection):
-        if TrelloCache.is_empty():
-            self.show_output_panel("No list on cache")
-        else:
-            list = TrelloCache.get() 
-            operation = CardOperation(list)
-            operation.command = self
-            operation.get_name(label="Card name (on list %s/%s)" % (list.board.name, list.name))
+        self.on_cached_operation(
+            lambda operation, list: operation.get_name(label="Card name (on list %s/%s)" % (list.board.name, list.name))
+        )
             
-class TrelloCreateCardWithDescriptionCommand(TrelloCommand, Navegable):
+class TrelloCreateCardWithDescriptionCommand(Navegable):
     def work(self, connection):
-        if TrelloCache.is_empty():
-            self.show_output_panel("No list on cache")
-        else:
-            list = TrelloCache.get() 
-            operation = CardOperation(list)
-            operation.command = self
-            operation.create_with_description(label="[List %s/%s]. " % (list.board.name, list.name))
+        self.on_cached_operation(
+            lambda operation, list: operation.create_with_description(label="[List %s/%s]. " % (list.board.name, list.name))
+        )           

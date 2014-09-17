@@ -40,9 +40,11 @@ class TrelloCommand(sublime_plugin.TextCommand):
 
     def help_text(self):
         first  = "Sorry for the interruption, in order to use the package please go to:\n%s\nand paste the token in the settings (Preferences -> Package Settings -> Trello -> Settings - User). You can check Settings - Default to see the settings structure." % self.token_url()
-        middle = "If you don't want to use the default app, you can change the key and the secret too, just go to:\n%s\nand copy paste both to the settings :)" % self.key_secret_generator_url()
-        last   = "For more info, you can go to: https://github.com/NicoSantangelo/sublime-text-trello"
-        return "%s\n\n%s\n\n%s" % (first, middle, last)
+        second = "If you don't want to use the default app, you can change the key and the secret too, just go to:\n%s\nand copy paste both to the settings :)" % self.key_secret_generator_url()
+        return self.compose_help_text(first, second)
+
+    def compose_help_text(self, first="", second="", last="For more info, you can go to: https://github.com/NicoSantangelo/sublime-text-trello"):
+        return "%s\n\n%s\n\n%s" % (first, second, last)
 
     def token_url(self):
         return "https://trello.com/1/connect?key=%s&name=sublime_app&response_type=token&scope=read,write" % self.key
