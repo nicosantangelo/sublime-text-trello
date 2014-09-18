@@ -38,5 +38,6 @@ class ProgressNotifier():
         sublime.set_timeout(lambda: self.run(i), 100)
 
     def stop(self):
-        sublime.status_message(self.success_message)
-        self.stopped = True
+        if not self.stopped:
+            sublime.status_message(self.success_message)
+            self.stopped = True

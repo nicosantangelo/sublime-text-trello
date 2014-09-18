@@ -20,7 +20,7 @@ If you want you can set it to false on your [user settings][3] so the panel will
 
 #### 'Quick create card' and 'Create card with description'
 
-It tries to create a Card on the last **active** List. The **active** list refers to the last List viewed using the `Trello: Navigate` command.
+It tries to create a Card on the last **active** List. The **active** List refers to the last List viewed using the `Trello: Navigate` command.
 
 If you didn't use `Navigate` yet the package will display a panel explaining the situation.
 

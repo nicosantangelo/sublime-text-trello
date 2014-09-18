@@ -1,0 +1,13 @@
+
+Hello! sorry for the interruption
+
+Trello has two new top level commands, 'Quick create card' and 'Create card with description'
+
+If you choose any of those commands, the package will create a Card on the last active List.
+The active List refers to the last List viewed using the `Trello: Navigate` command.
+
+If you didn't use `Navigate` yet the package will display a panel explaining the situation.
+
+That's all, thanks!
+
+For issues, feature requests or info, you can go to: https://github.com/NicoSantangelo/sublime-text-trello
