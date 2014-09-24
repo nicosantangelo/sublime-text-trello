@@ -1,3 +1,5 @@
+import requests
+
 try:
     from trello import TrelloCommand
     from trello_cache import TrelloCache
@@ -8,6 +10,15 @@ except ImportError:
     from .operations import BoardOperation, CardOperation
 
 class Navegable(TrelloCommand):
+    def work(self, connection):
+        try:
+            self.safe_work(connection)
+        except requests.exceptions.HTTPError as e:
+            help_text = self.compose_help_text("It seems your token is invalid or has expired, try adding it again.\nToken URL: %s" % self.token_url(),
+                "The error encountered was: '%s'" % e)
+            self.show_output_panel(help_text)
+            raise e
+
     def display(self, names, callback = None):
         self.show_quick_panel(names, callback)
 
@@ -33,17 +44,17 @@ class Navegable(TrelloCommand):
             fn(operation, trello_element)
 
 class TrelloNavigateCommand(Navegable):
-    def work(self, connection):
+    def safe_work(self, connection):
         BoardOperation(connection.me).execute(self)
 
 class TrelloQuickCreateCardCommand(Navegable):
-    def work(self, connection):
+    def safe_work(self, connection):
         self.on_cached_operation(
             lambda operation, list: operation.get_name(label="Card name (on list %s/%s)" % (list.board.name, list.name))
         )
             
 class TrelloCreateCardWithDescriptionCommand(Navegable):
-    def work(self, connection):
+    def safe_work(self, connection):
         self.on_cached_operation(
             lambda operation, list: operation.create_with_description(label="[List %s/%s]. " % (list.board.name, list.name))
         )           
