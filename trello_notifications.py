@@ -37,8 +37,8 @@ class TrelloNotificationsCommand(TrelloCommand):
         except requests.exceptions.HTTPError:
             first = "There was an error trying to read the notifications. This probably means that you need to grant the app 'account' privileges."
             second = "If you want to do this, revoke your current app (https://trello.com/username/account) and remove the token from your settings."
-            third = "Then add 'account' to the scopes when re-accesing the app like this:\n%s,account" % (self.token_url())
-            self.show_output_panel("%s\n\n%s\n\n%s\n\nThanks!" % (first, second, third))
+            third = "Then add 'account' to the scopes when re-accesing the app like this:\n%s,account.\n\nThanks!" % (self.token_url())
+            self.show_output_panel_composing(first, second, third)
 
     def noop(self):
         pass
