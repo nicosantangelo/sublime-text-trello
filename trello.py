@@ -16,7 +16,7 @@ class TrelloCommand(sublime_plugin.TextCommand):
         self.setup_data_from_settings()
         
         if not self.token:
-            self.show_output_panel(self.help_text())
+            self.help_text()
             return
             
         if not self.use_cache:
@@ -41,7 +41,14 @@ class TrelloCommand(sublime_plugin.TextCommand):
     def help_text(self):
         first  = "Sorry for the interruption, in order to use the package please go to:\n%s\nand paste the token in the settings (Preferences -> Package Settings -> Trello -> Settings - User). You can check Settings - Default to see the settings structure." % self.token_url()
         second = "If you don't want to use the default app, you can change the key and the secret too, just go to:\n%s\nand copy paste both to the settings :)" % self.key_secret_generator_url()
-        return self.compose_help_text(first, second)
+        self.show_output_panel_composing(first, second)
+
+    def show_token_expired_help(self, e):
+        self.show_output_panel_composing("It seems your token is invalid or has expired, try adding it again.\nToken URL: %s" % self.token_url(), "The error encountered was: '%s'" % e)
+
+    def show_output_panel_composing(self, *args):
+        help_text = self.compose_help_text(*args)
+        self.show_output_panel(help_text)
 
     def compose_help_text(self, first="", second="", last="For more info, you can go to: https://github.com/NicoSantangelo/sublime-text-trello"):
         return "%s\n\n%s\n\n%s" % (first, second, last)

@@ -46,5 +46,9 @@ class TrelloNotificationsCommand(TrelloCommand):
 class TrelloUnreadNotificationsCommand(TrelloCommand):
     def work(self, connection):
         member = connection.me
-        output = Output.notifications(member.unread_notifications())
-        self.show_output_panel(output)
+        try:
+            output = Output.notifications(member.unread_notifications())
+            self.show_output_panel(output)
+        except requests.exceptions.HTTPError as e:
+            self.show_token_expired_help(e)
+            raise e

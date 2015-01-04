@@ -14,9 +14,7 @@ class Navegable(TrelloCommand):
         try:
             self.safe_work(connection)
         except requests.exceptions.HTTPError as e:
-            help_text = self.compose_help_text("It seems your token is invalid or has expired, try adding it again.\nToken URL: %s" % self.token_url(),
-                "The error encountered was: '%s'" % e)
-            self.show_output_panel(help_text)
+            self.show_token_expired_help(e)
             raise e
 
     def display(self, names, callback = None):
@@ -36,8 +34,7 @@ class Navegable(TrelloCommand):
 
     def on_cached_operation(self, fn):
         if TrelloCache.is_empty():
-            help_text = self.compose_help_text("No active Trello List found.", "This command works on the last visited list using 'Trello: Navigate'.")
-            self.show_output_panel(help_text)
+            self.show_output_panel_composing("No active Trello List found.", "This command works on the last visited list using 'Trello: Navigate'.")
         else:
             operation = TrelloCache.get() 
             trello_element = operation.trello_element
