@@ -79,6 +79,10 @@ class TrelloCommand(sublime_plugin.TextCommand):
         view.set_scratch(True)
         OpenViews.set(view, extra)
 
+    def insert_text(self, text):
+        view = self.view.window().active_view()
+        view.run_command("view_insert", { "size" : self.view.sel()[0].begin(), "content": text });
+
     def show_in_tab(self, text):
         view = self.view.window().new_file()
         view.set_name("Trello")

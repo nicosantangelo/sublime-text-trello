@@ -23,6 +23,9 @@ class Navegable(TrelloCommand):
     def input(self, label, callback = None):
         self.show_input_panel(label, "", callback)
 
+    def insert(self, text):
+        self.insert_text(text)
+
     def output(self, text):
         if self.results_in_new_tab:
             self.show_in_tab(text)

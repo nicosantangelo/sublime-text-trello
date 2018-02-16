@@ -32,6 +32,10 @@ The card has:
         return color + ": " +  label['name'] if label['name'] else color
 
     @classmethod
+    def link(cls, link):
+        return "[[{}]]".format(link)
+
+    @classmethod
     def comments(cls, comments):
         comments_text = ""
         if comments:
