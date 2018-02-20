@@ -328,6 +328,7 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
     _prefix = '/cards/'
 
     url = Field('url')
+    short_url = Field('shortUrl')
     closed = Field('closed')
     name = Field('name')
     badges = Field('badges')
@@ -419,7 +420,7 @@ class Member(LazyTrello):
     cards = SubList('Card')
     notifications = SubList('Notification')
     organizations = SubList('Organization')
-    
+
     # TODO: Generalize this pattern, add it to a base class, and make it work
     # correctly with SubList. Until then....
     def add_board(self, name, organization=None, prefs_permissionLevel="private"):
@@ -448,7 +449,7 @@ class Notification(LazyTrello):
     type = Field('type')
     unread = Field()
 
-    creator = ObjectField('idMemberCreator', 'Member') 
+    creator = ObjectField('idMemberCreator', 'Member')
 
     def unread(self, member):
         path = member._path + self._prefix

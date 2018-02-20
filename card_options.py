@@ -11,13 +11,14 @@ class CardOptions(Executable):
     def __init__(self, card, previous_operation = None):
         self.options = [
             { 'name': "..", 'action': self.go_back },
-            { 'name': "Open in Browser", 'action': self.open_in_browser },
+            { 'name': "Open in browser", 'action': self.open_in_browser },
+            { 'name': "Insert link", 'action': self.insert_link},
             { 'name': "Show", 'action': self.show, 'single_step': True },
             { 'name': "Comments", 'action': self.comments, 'single_step': True },
             { 'name': "Comment", 'action': self.comment },
             { 'name': "Add label", 'action': self.set_label },
             { 'name': "Remove label", 'action': self.clear_label },
-            { 'name': "Move to another List", 'action': self.move },
+            { 'name': "Move to another list", 'action': self.move },
             { 'name': "Archive", 'action': self.close, 'single_step': True },
             { 'name': "Exit", 'action': self.noop }
         ]
@@ -37,6 +38,9 @@ class CardOptions(Executable):
     # Actions
     def show(self):
         self.command.output(Output.card(self.card))
+
+    def insert_link(self):
+        self.command.insert_text(Output.link(self.card.short_url))
 
     def comments(self):
         self.command.output(Output.comments(self.card.comments()))
@@ -82,5 +86,5 @@ class CardOptions(Executable):
         valid_label_colors = ['green', 'yellow', 'orange', 'red', 'purple', 'blue']
         current_colors = [label['color'] for label in self.card.labels]
         available_choices = [label + ("*" if label in current_colors else "") for label in valid_label_colors]
-        
+
         return "Colors (* is active): " + ", ".join(available_choices)
