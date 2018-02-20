@@ -33,7 +33,7 @@ The card has:
 
     @classmethod
     def link(cls, link):
-        return "[[{}]]".format(link)
+        return "{}".format(link)
 
     @classmethod
     def comments(cls, comments):
