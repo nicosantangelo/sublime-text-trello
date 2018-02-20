@@ -328,7 +328,7 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
     _prefix = '/cards/'
 
     url = Field('url')
-    shortUrl = Field('shortUrl')
+    short_url = Field('shortUrl')
     closed = Field('closed')
     name = Field('name')
     badges = Field('badges')

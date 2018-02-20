@@ -40,7 +40,7 @@ class CardOptions(Executable):
         self.command.output(Output.card(self.card))
 
     def insert_link(self):
-        self.command.insert_text(Output.link(self.card.shortUrl))
+        self.command.insert_text(Output.link(self.card.short_url))
 
     def comments(self):
         self.command.output(Output.comments(self.card.comments()))
