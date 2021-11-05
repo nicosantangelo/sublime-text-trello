@@ -335,6 +335,7 @@ class Card(LazyTrello, Closable, Deletable, Labeled):
     checkItemStates = Field()
     desc = Field('desc')
     labels = Field("labels")
+    due = DateField("due")
 
     board = ObjectField('idBoard', 'Board')
     list = ObjectField('idList', 'List')
@@ -365,7 +366,7 @@ class Checklist(LazyTrello):
     _prefix = '/checklists/'
 
     checkItems = SubList('CheckItem')
-    name = Field()
+    name = Field('name')
     board = ObjectField('idBoard', 'Board')
     cards = SubList('Card')
 
@@ -379,7 +380,9 @@ class CheckItem(LazyTrello):
 
     _prefix = '/checkItems/'
 
-    name = Field()
+    due = DateField('due')
+    state = Field('state')
+    name = Field('name')
     pos = Field()
     type = Field()
 
